@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A focused flashcard and quiz app for FAA Remote Pilot study.">
+  <meta name="theme-color" content="#12233f">
+  <title>Remote Pilot Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to study content</a>
+
+  <header class="site-header">
+    <div class="brand-lockup">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img"><path d="M32 8 18 29l14-6 14 6L32 8Z"/><path d="M11 38h42M18 47h28"/></svg>
+      </span>
+      <div>
+        <p class="eyebrow">FAA Part 107 study desk</p>
+        <h1>Remote Pilot Lab</h1>
+      </div>
+    </div>
+    <div class="header-meta" aria-label="Study collection information">
+      <span id="card-count-label">— cards</span>
+      <span id="question-count-label">— questions</span>
+      <span class="status-dot">In-session only</span>
+    </div>
+  </header>
+
+  <nav class="tab-bar" aria-label="Study modes">
+    <button class="tab-button is-active" type="button" id="flashcards-tab" role="tab" aria-selected="true" aria-controls="flashcards-panel" data-tab="flashcards">
+      <span aria-hidden="true">◫</span> Flashcards
+    </button>
+    <button class="tab-button" type="button" id="quiz-tab" role="tab" aria-selected="false" aria-controls="quiz-panel" data-tab="quiz">
+      <span aria-hidden="true">✓</span> Quiz
+    </button>
+  </nav>
+
+  <main id="main-content">
+    <section class="tab-panel is-active" id="flashcards-panel" role="tabpanel" aria-labelledby="flashcards-tab">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Learn one idea at a time</p>
+          <h2>Build the mental picture.</h2>
+          <p>Try to answer first. Then reveal the explanation and decide whether to revisit it.</p>
+        </div>
+        <div class="session-meter" aria-live="polite">
+          <strong id="mastered-count">0</strong>
+          <span>known this session</span>
+        </div>
+      </div>
+
+      <div class="control-strip" aria-label="Flashcard filters">
+        <label>Chapter
+          <select id="flashcard-chapter-filter"><option value="all">All chapters</option></select>
+        </label>
+        <label>Topic
+          <select id="flashcard-topic-filter"><option value="all">All topics</option></select>
+        </label>
+        <button class="quiet-button" id="shuffle-cards" type="button">↝ Shuffle</button>
+      </div>
+
+      <div class="study-stage">
+        <div class="card-progress-row">
+          <span id="flashcard-progress">Card — of —</span>
+          <span id="flashcard-source-top"></span>
+        </div>
+
+        <article class="flashcard" id="flashcard" tabindex="0" aria-live="polite" aria-label="Flashcard. Press space to reveal the answer.">
+          <div class="flashcard-visual" id="flashcard-visual">
+            <img id="flashcard-image" alt="" hidden>
+            <div class="visual-placeholder" id="visual-placeholder" aria-hidden="true">
+              <span class="radar-ring ring-one"></span>
+              <span class="radar-ring ring-two"></span>
+              <span class="radar-sweep"></span>
+              <span class="tiny-drone">✦</span>
+            </div>
+            <div class="image-question" id="image-question" hidden></div>
+          </div>
+          <div class="flashcard-copy">
+            <div class="tag-row" id="flashcard-tags"></div>
+            <p class="prompt-label">Question</p>
+            <h3 id="flashcard-question">Loading study material…</h3>
+            <div class="answer-block" id="flashcard-answer" hidden>
+              <p class="prompt-label">Answer</p>
+              <p class="answer-text" id="flashcard-answer-text"></p>
+              <p class="explanation" id="flashcard-explanation"></p>
+              <p class="source-line" id="flashcard-source"></p>
+            </div>
+            <button class="primary-button reveal-button" id="reveal-card" type="button">Reveal answer <span>Space</span></button>
+          </div>
+        </article>
+
+        <div class="card-actions">
+          <button class="icon-button" id="previous-card" type="button" aria-label="Previous flashcard">←</button>
+          <div class="rating-actions" id="rating-actions" hidden>
+            <button class="again-button" id="mark-again" type="button">Again</button>
+            <button class="know-button" id="mark-known" type="button">I knew it</button>
+          </div>
+          <button class="icon-button" id="next-card" type="button" aria-label="Next flashcard">→</button>
+        </div>
+        <p class="key-hint">Keyboard: <kbd>Space</kbd> reveal · <kbd>←</kbd> previous · <kbd>→</kbd> next</p>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="quiz-panel" role="tabpanel" aria-labelledby="quiz-tab" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Test retrieval, not recognition</p>
+          <h2>Prove what you know.</h2>
+          <p>Questions are shuffled every time. A page reload clears the session and starts fresh.</p>
+        </div>
+        <div class="session-meter quiz-meter">
+          <strong id="best-streak">0</strong>
+          <span>best streak</span>
+        </div>
+      </div>
+
+      <section class="quiz-setup" id="quiz-setup" aria-labelledby="quiz-setup-title">
+        <div class="setup-copy">
+          <span class="setup-number">01</span>
+          <div>
+            <p class="eyebrow">Configure a session</p>
+            <h3 id="quiz-setup-title">Short enough to start. Hard enough to matter.</h3>
+          </div>
+        </div>
+        <div class="setup-grid">
+          <label>Number of questions
+            <select id="quiz-count">
+              <option value="10">10 questions</option>
+              <option value="20">20 questions</option>
+              <option value="50">50 questions</option>
+              <option value="100">100 questions</option>
+              <option value="all">All available</option>
+            </select>
+          </label>
+          <label>Chapter
+            <select id="quiz-chapter-filter"><option value="all">All chapters</option></select>
+          </label>
+          <label>Topic
+            <select id="quiz-topic-filter"><option value="all">All topics</option></select>
+          </label>
+        </div>
+        <p class="availability-note" id="quiz-availability"></p>
+        <button class="primary-button start-button" id="start-quiz" type="button">Start quiz <span>→</span></button>
+      </section>
+
+      <section class="quiz-runner" id="quiz-runner" hidden aria-live="polite">
+        <div class="quiz-progress-copy">
+          <span id="quiz-progress-label">Question 1 of 10</span>
+          <span id="quiz-live-score">0 correct</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><span id="quiz-progress-bar"></span></div>
+        <article class="question-card">
+          <div class="tag-row" id="quiz-tags"></div>
+          <h3 id="quiz-question"></h3>
+          <div class="quiz-figure-wrap" id="quiz-figure-wrap" hidden>
+            <img id="quiz-image" alt="">
+          </div>
+          <div class="options-list" id="quiz-options" role="group" aria-label="Answer choices"></div>
+          <div class="feedback-box" id="quiz-feedback" hidden></div>
+          <div class="question-footer">
+            <button class="text-button" id="quit-quiz" type="button">End session</button>
+            <button class="primary-button" id="next-question" type="button" hidden>Next question <span>→</span></button>
+          </div>
+        </article>
+      </section>
+
+      <section class="results-card" id="quiz-results" hidden aria-labelledby="results-title">
+        <div class="score-orbit">
+          <span id="result-percent">0%</span>
+          <small>percent correct</small>
+        </div>
+        <div class="results-copy">
+          <p class="eyebrow">Session complete</p>
+          <h3 id="results-title">Result</h3>
+          <p id="result-summary"></p>
+          <p class="percentile-note">This is your percentage score. A true percentile would require anonymous results from a group of learners.</p>
+          <div class="result-actions">
+            <button class="primary-button" id="retry-quiz" type="button">Try another quiz</button>
+            <button class="quiet-button" id="study-misses" type="button">Study missed topics</button>
+          </div>
+        </div>
+        <div class="missed-review" id="missed-review" hidden>
+          <h4>Questions to revisit</h4>
+          <div id="missed-list"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Study aid, not legal advice.</strong> Regulations change. Verify operational decisions with current FAA sources.</p>
+    <button class="text-button" id="open-about" type="button">How this study set was built</button>
+  </footer>
+
+  <dialog id="about-dialog">
+    <form method="dialog">
+      <button class="dialog-close" aria-label="Close" value="close">×</button>
+      <p class="eyebrow">About this collection</p>
+      <h2>Built for active recall.</h2>
+      <p>The first study set covers the two available chapters: UAS language and systems, followed by foundational regulations. Book page references point to the numbered source images in the local archive.</p>
+      <p>The searchable book transcription contains known OCR errors. Study items were limited to clearly supported concepts and cross-checked against current FAA pages where rules could have changed.</p>
+      <p>No scores are saved. Reloading the page starts a clean session.</p>
+      <button class="primary-button" value="close">Got it</button>
+    </form>
+  </dialog>
+
+  <noscript>This study site requires JavaScript to run the flashcards and quiz.</noscript>
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

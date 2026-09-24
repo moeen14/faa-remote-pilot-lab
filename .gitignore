@@ -1,0 +1,6 @@
+Photos from Books/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.edge-*
