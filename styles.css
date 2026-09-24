@@ -172,7 +172,7 @@ kbd { padding: .1rem .35rem; background: rgba(255,255,255,.6); border: 1px solid
 .setup-copy { display: flex; align-items: center; gap: 1.5rem; }
 .setup-number { color: var(--orange); font: 700 3.5rem/1 "Fraunces", serif; }
 .setup-copy h3, .results-copy h3 { margin: 0; font: 650 clamp(1.5rem, 3vw, 2.3rem)/1.15 "Fraunces", serif; }
-.setup-grid { margin: 2rem 0 .7rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.setup-grid { margin: 2rem 0 .7rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .setup-grid select { width: 100%; }
 .availability-note { min-height: 1.5rem; margin: .6rem 0 1.2rem; color: var(--ink-soft); font-size: .84rem; }
 .start-button { min-width: 180px; }
@@ -210,6 +210,8 @@ kbd { padding: .1rem .35rem; background: rgba(255,255,255,.6); border: 1px solid
 
 footer { max-width: 1120px; margin: 0 auto; padding: 1.5rem 2rem 3rem; display: flex; justify-content: space-between; gap: 2rem; color: var(--ink-soft); border-top: 1px solid var(--line); font-size: .8rem; }
 footer p { margin: .5rem 0; }
+footer a { color: var(--teal); font-weight: 700; text-underline-offset: 3px; }
+.footer-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 1.2rem; }
 dialog { width: min(600px, calc(100% - 2rem)); color: var(--ink); background: var(--card); border: 0; border-radius: 22px; box-shadow: var(--shadow); }
 dialog::backdrop { background: rgba(10, 22, 40, .68); backdrop-filter: blur(3px); }
 dialog form { padding: 1rem; }
@@ -235,6 +237,7 @@ dialog h2 { margin-top: 0; font: 700 2rem "Fraunces", serif; }
   .results-card { grid-template-columns: 1fr; }
   .score-orbit { width: 145px; }
   footer { flex-direction: column; gap: .3rem; }
+  .footer-links { justify-content: flex-start; }
 }
 
 @media (max-width: 600px) {

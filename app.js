@@ -34,26 +34,38 @@
     return data.sources[id] || { label: "Source unavailable" };
   }
 
-  function sourceNode(sourceId) {
-    const source = sourceFor(sourceId);
+  function sourceIds(item) {
+    return [item.source, item.verificationSource].filter(Boolean);
+  }
+
+  function sourceLabel(item) {
+    return sourceIds(item).map((id) => sourceFor(id).label).join(" · Verified: ");
+  }
+
+  function sourceNode(item) {
+    const ids = sourceIds(item);
     const fragment = document.createDocumentFragment();
-    fragment.append("Source: ");
-    if (source.url) {
-      const link = document.createElement("a");
-      link.href = source.url;
-      link.target = "_blank";
-      link.rel = "noreferrer";
-      link.textContent = source.label;
-      fragment.append(link);
-    } else {
-      fragment.append(source.label);
-    }
+    fragment.append(ids.length > 1 ? "Sources: " : "Source: ");
+    ids.forEach((id, index) => {
+      const source = sourceFor(id);
+      if (index > 0) fragment.append(" · ");
+      if (source.url) {
+        const link = document.createElement("a");
+        link.href = source.url;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.textContent = source.label;
+        fragment.append(link);
+      } else {
+        fragment.append(source.label);
+      }
+    });
     return fragment;
   }
 
   function tagNodes(item) {
     const fragment = document.createDocumentFragment();
-    [`Chapter ${item.chapter}`, item.topic].forEach((value) => {
+    [`Chapter ${item.chapter}`, `Page ${item.page}`, item.topic].forEach((value) => {
       const tag = document.createElement("span");
       tag.className = "tag";
       tag.textContent = value;
@@ -73,20 +85,25 @@
 
   function initializeFilters() {
     const chapters = [...new Set(data.flashcards.map((item) => item.chapter))].sort();
+    const pages = [...new Set(data.flashcards.map((item) => item.page))].sort();
     const topics = [...new Set(data.flashcards.map((item) => item.topic))].sort();
     const quizTopics = [...new Set(data.questions.map((item) => item.topic))].sort();
 
     populateSelect($("#flashcard-chapter-filter"), chapters, (chapter) => `Chapter ${chapter}`);
     populateSelect($("#quiz-chapter-filter"), chapters, (chapter) => `Chapter ${chapter}`);
+    populateSelect($("#flashcard-page-filter"), pages, (page) => `Page ${page}`);
+    populateSelect($("#quiz-page-filter"), pages, (page) => `Page ${page}`);
     populateSelect($("#flashcard-topic-filter"), topics);
     populateSelect($("#quiz-topic-filter"), quizTopics);
   }
 
   function filteredCards() {
     const chapter = $("#flashcard-chapter-filter").value;
+    const page = $("#flashcard-page-filter").value;
     const topic = $("#flashcard-topic-filter").value;
     return data.flashcards.filter((card) =>
       (chapter === "all" || card.chapter === chapter) &&
+      (page === "all" || card.page === page) &&
       (topic === "all" || card.topic === topic)
     );
   }
@@ -110,13 +127,12 @@
     }
 
     const card = state.cards[state.cardIndex];
-    const source = sourceFor(card.source);
     $("#flashcard-progress").textContent = `Card ${state.cardIndex + 1} of ${state.cards.length}`;
-    $("#flashcard-source-top").textContent = source.label;
+    $("#flashcard-source-top").textContent = sourceLabel(card);
     $("#flashcard-question").textContent = card.question;
     $("#flashcard-answer-text").textContent = card.answer;
     $("#flashcard-explanation").textContent = card.explanation;
-    $("#flashcard-source").replaceChildren(sourceNode(card.source));
+    $("#flashcard-source").replaceChildren(sourceNode(card));
     $("#flashcard-tags").replaceChildren(tagNodes(card));
 
     const image = $("#flashcard-image");
@@ -173,9 +189,11 @@
 
   function filteredQuestions() {
     const chapter = $("#quiz-chapter-filter").value;
+    const page = $("#quiz-page-filter").value;
     const topic = $("#quiz-topic-filter").value;
     return data.questions.filter((question) =>
       (chapter === "all" || question.chapter === chapter) &&
+      (page === "all" || question.page === page) &&
       (topic === "all" || question.topic === topic)
     );
   }
@@ -277,7 +295,7 @@
     explanation.textContent = question.explanation;
     const source = document.createElement("p");
     source.className = "source-line";
-    source.append(sourceNode(question.source));
+    source.append(sourceNode(question));
     feedback.replaceChildren(verdict, explanation, source);
     feedback.hidden = false;
     $("#quiz-live-score").textContent = `${state.quizAnswers.filter((answer) => answer.correct).length} correct`;
@@ -365,6 +383,7 @@
     if (!weakest) return;
     switchTab("flashcards");
     $("#flashcard-chapter-filter").value = "all";
+    $("#flashcard-page-filter").value = "all";
     $("#flashcard-topic-filter").value = weakest;
     updateCardDeck({ randomize: true });
     $("#flashcards-panel").scrollIntoView({ behavior: "smooth" });
@@ -376,6 +395,7 @@
       if (ids.has(item.id)) console.warn(`Duplicate study item ID: ${item.id}`);
       ids.add(item.id);
       if (!data.sources[item.source]) console.warn(`Missing source ${item.source} for ${item.id}`);
+      if (item.verificationSource && !data.sources[item.verificationSource]) console.warn(`Missing verification source ${item.verificationSource} for ${item.id}`);
     });
     data.questions.forEach((question) => {
       if (!Number.isInteger(question.answer) || !question.options[question.answer]) {
@@ -388,6 +408,7 @@
   initializeFilters();
   $("#card-count-label").textContent = `${data.flashcards.length} cards`;
   $("#question-count-label").textContent = `${data.questions.length} questions`;
+  $("#coverage-count-label").textContent = `${data.meta.pageCount}/${data.meta.pageCount} pages`;
   renderCard();
   updateAvailability();
   const requestedCard = new URLSearchParams(location.search).get("card");
@@ -400,6 +421,7 @@
 
   $$(".tab-button").forEach((button) => button.addEventListener("click", () => switchTab(button.dataset.tab)));
   $("#flashcard-chapter-filter").addEventListener("change", () => updateCardDeck());
+  $("#flashcard-page-filter").addEventListener("change", () => updateCardDeck());
   $("#flashcard-topic-filter").addEventListener("change", () => updateCardDeck());
   $("#shuffle-cards").addEventListener("click", () => updateCardDeck({ randomize: true }));
   $("#reveal-card").addEventListener("click", revealCard);
@@ -407,7 +429,7 @@
   $("#next-card").addEventListener("click", () => moveCard(1));
   $("#mark-again").addEventListener("click", () => rateCard(false));
   $("#mark-known").addEventListener("click", () => rateCard(true));
-  [$("#quiz-count"), $("#quiz-chapter-filter"), $("#quiz-topic-filter")].forEach((control) => control.addEventListener("change", updateAvailability));
+  [$("#quiz-count"), $("#quiz-chapter-filter"), $("#quiz-page-filter"), $("#quiz-topic-filter")].forEach((control) => control.addEventListener("change", updateAvailability));
   $("#start-quiz").addEventListener("click", startQuiz);
   $("#next-question").addEventListener("click", nextQuestion);
   $("#quit-quiz").addEventListener("click", finishQuiz);

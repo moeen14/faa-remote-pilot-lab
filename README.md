@@ -2,11 +2,12 @@
 
 Remote Pilot Lab is a responsive, no-build study website for FAA Remote Pilot material. It turns the books and notes in this course folder into active-recall flashcards and self-grading multiple-choice quizzes.
 
-The initial set covers the two currently available chapters from *The Complete Remote Pilot, Second Edition*: UAS language and systems, then foundational regulations. The website is intentionally small at first so the learner can gain confidence before more material is added.
+The current bank provides a page-by-page treatment of all 28 available source images from *The Complete Remote Pilot, Second Edition*. It contains **170 focused flashcards and 170 distinct MCQs**, with 5–8 concepts attached to every source page. Learners can still keep sessions small by selecting a chapter, page, topic, and quiz length.
 
 ## Important context for humans and AI models
 
 - `questions.js` in the repository root is the single source of truth for all flashcards, quiz questions, book metadata, and source references.
+- `COVERAGE.md` is the audit showing the number and subject of study items derived from every source page.
 - The original book scans and Word transcription live under `Photos from Books/`. That folder is deliberately excluded from Git because it contains large source files and copyrighted book pages.
 - The Word document contains all 28 full-page facsimiles, but its searchable OCR text is **not a perfect verbatim transcription**. Use the facsimile pages as the authority when the OCR differs.
 - The existing review found common OCR problems: merged words, bad punctuation or symbols, misspellings, and incorrect reading order on complex pages. Do not generate a new rule or exact quotation solely from imperfect OCR.
@@ -21,6 +22,7 @@ The initial set covers the two currently available chapters from *The Complete R
 ├── styles.css                 # Responsive visual system
 ├── app.js                     # Flashcard and quiz behavior
 ├── questions.js               # ALL study content; keep this at root
+├── COVERAGE.md                # Page-by-page content audit
 ├── assets/
 │   └── books/
 │       └── complete-remote-pilot/
@@ -41,46 +43,24 @@ python -m http.server 8000
 
 Then visit `http://localhost:8000`.
 
-## Add a flashcard
+## Add study material
 
-Add an object to `STUDY_DATA.flashcards` in `questions.js`:
-
-```js
-{
-  id: "c29-unique-name",
-  book: "completeRemotePilot",
-  chapter: "3",
-  topic: "Weather",
-  question: "A single, focused prompt?",
-  answer: "The concise answer.",
-  explanation: "Why it is true and what mistake to avoid.",
-  source: "book-31",
-  image: "assets/books/complete-remote-pilot/optional-figure.jpg",
-  imageAlt: "A meaningful description of the optional figure"
-}
-```
-
-If `image` is present, the interface automatically places the question over the figure as requested. Keep image crops wide enough to include the complete figure, labels, borders, legends, and any cautionary note that changes its meaning. The traffic-pattern crop was specifically rechecked to ensure its left edge, base leg, border, and printed note are present.
-
-## Add a quiz question
-
-Add an object to `STUDY_DATA.questions`:
+Add a fact row to the `rows` array in `questions.js`. Each fact automatically becomes one flashcard and one independently answerable MCQ:
 
 ```js
-{
-  id: "q41-unique-name",
-  book: "completeRemotePilot",
-  chapter: "3",
-  topic: "Weather",
-  question: "What does this report indicate?",
-  options: ["Choice A", "Choice B", "Choice C", "Choice D"],
-  answer: 2,
-  explanation: "Why option C is correct.",
-  source: "faa-new-source"
-}
+[29, "Weather",
+  "A single, focused prompt?",
+  "The concise correct answer.",
+  ["Plausible distractor 1", "Plausible distractor 2", "Plausible distractor 3"],
+  "Why the answer is correct and what mistake to avoid.",
+  "optionalFigureKey",
+  "optional-current-source-id"
+]
 ```
 
-`answer` is a zero-based index: `0` means A, `1` means B, `2` means C, and `3` means D. IDs must remain unique. The interface supports 10, 20, 50, 100, or all matching questions; when a requested count is larger than the filtered pool, it uses every available question.
+The option order rotates automatically so correct answers do not stay in the same letter position. Figure keys are defined near the top of the file. Keep crops wide enough to include the complete figure, labels, borders, legends, and any cautionary note that changes its meaning. The traffic-pattern crop was specifically rechecked to ensure its left edge, base leg, border, and printed note are present.
+
+Stable IDs are generated from the source page and the row's position on that page. Append new rows instead of silently reordering existing rows when preserving IDs matters. The interface supports 10, 20, 50, 100, or all matching questions.
 
 ## Add another book
 
@@ -117,7 +97,7 @@ The result is percent correct. A true percentile compares a learner against a po
 3. Take a 10-question mixed quiz.
 4. Read every explanation, including correct answers.
 5. Use “Study missed topics,” then retry with a shuffled set.
-6. Increase to 20, 50, and eventually 100 questions as the question bank grows.
+6. Increase to 20, 50, and finally 100-question mixed sessions as confidence grows.
 
 Good future improvements, in priority order:
 

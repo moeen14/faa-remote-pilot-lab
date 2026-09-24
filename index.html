@@ -27,6 +27,7 @@
     <div class="header-meta" aria-label="Study collection information">
       <span id="card-count-label">— cards</span>
       <span id="question-count-label">— questions</span>
+      <span id="coverage-count-label">— pages</span>
       <span class="status-dot">In-session only</span>
     </div>
   </header>
@@ -57,6 +58,9 @@
       <div class="control-strip" aria-label="Flashcard filters">
         <label>Chapter
           <select id="flashcard-chapter-filter"><option value="all">All chapters</option></select>
+        </label>
+        <label>Source page
+          <select id="flashcard-page-filter"><option value="all">All pages</option></select>
         </label>
         <label>Topic
           <select id="flashcard-topic-filter"><option value="all">All topics</option></select>
@@ -141,6 +145,9 @@
           <label>Chapter
             <select id="quiz-chapter-filter"><option value="all">All chapters</option></select>
           </label>
+          <label>Source page
+            <select id="quiz-page-filter"><option value="all">All pages</option></select>
+          </label>
           <label>Topic
             <select id="quiz-topic-filter"><option value="all">All topics</option></select>
           </label>
@@ -195,7 +202,10 @@
 
   <footer>
     <p><strong>Study aid, not legal advice.</strong> Regulations change. Verify operational decisions with current FAA sources.</p>
-    <button class="text-button" id="open-about" type="button">How this study set was built</button>
+    <div class="footer-links">
+      <a href="COVERAGE.md">28-page coverage audit</a>
+      <button class="text-button" id="open-about" type="button">How this study set was built</button>
+    </div>
   </footer>
 
   <dialog id="about-dialog">
@@ -203,7 +213,7 @@
       <button class="dialog-close" aria-label="Close" value="close">×</button>
       <p class="eyebrow">About this collection</p>
       <h2>Built for active recall.</h2>
-      <p>The first study set covers the two available chapters: UAS language and systems, followed by foundational regulations. Book page references point to the numbered source images in the local archive.</p>
+      <p>The current bank contains 170 flashcards and 170 distinct MCQs covering every numbered source image. Book page references point to the local archive, and chapter, page, and topic filters let you keep sessions small.</p>
       <p>The searchable book transcription contains known OCR errors. Study items were limited to clearly supported concepts and cross-checked against current FAA pages where rules could have changed.</p>
       <p>No scores are saved. Reloading the page starts a clean session.</p>
       <button class="primary-button" value="close">Got it</button>
