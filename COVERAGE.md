@@ -1,22 +1,16 @@
 # Study Coverage Audit
 
-This audit maps the current bank to all 94 numbered source images. Every listed concept produces one flashcard and one MCQ, giving **467 flashcards and 467 MCQs** in total.
+This audit maps the current bank to source images from *The Complete Remote Pilot, Second Edition*. Every listed concept produces one flashcard and one MCQ, giving **419 flashcards and 419 MCQs** in total.
 
 The counts demonstrate coverage, not verbatim transcription. Questions paraphrase the source and avoid relying on known OCR errors. Time-sensitive rules include links to current FAA material inside the study interface.
 
+**Exam-relevance filter:** source pages 1, 2, 5, 6, 7, 8, 9, and 11 are intentionally absent from this table. They covered drone/RC history and consumer-hardware trivia (flight controller, IMU, ESC, LiPo specs, propellers, gimbal, headless mode, trim, RC transmitter stick modes) and industry "applications" of UAS — none of which the FAA's Part 107 (UAG) knowledge test covers. See the exam-relevance policy in `README.md`.
+
 | Source page | Chapter filter | Items | Main coverage |
 |---:|---:|---:|---|
-| 01 | 1 | 5 | 1849 balloons, Langley Aerodrome, World War I pilotless aircraft, V-1, Project Aphrodite |
-| 02 | 1 | 5 | Tesla radio control, hobby aircraft, RC helicopters, precision agriculture, aviation language |
 | 03 | 1 | 8 | AC, AIRMET, angle of attack, ATC, ATIS, BVLOS, FRIA, LAANC |
 | 04 | 1 | 8 | Remote PIC, Remote ID, UA/UAS, runway/taxiway, SIGMET, UTC, VLOS, METAR/TAF |
-| 05 | 1 | 6 | Fixed-wing and rotor-wing aircraft, quadcopters, hexacopters, power and core systems |
-| 06 | 1 | 5 | Flight controller, IMU, magnetometer, ESC, labeled component diagram |
-| 07 | 1 | 6 | GPS limitations, position hold, Return to Home, mAh, LiPo cell count, C rating |
-| 08 | 1 | 5 | ESCs, brushless motors, Mode 2 controls, LiPo hazards |
-| 09 | 1 | 5 | Opposing rotors, propeller direction, camera gimbals, headless mode, trim |
 | 10 | 1 | 5 | Roll, pitch, yaw, aircraft axes, ailerons and elevator |
-| 11 | 2 | 5 | Real estate, search and rescue, utilities, firefighting, operational limits |
 | 12 | 2 | 5 | Current FAA publications, AIM, high-relevance subjects, glossary, official sources |
 | 13 | 2 | 5 | Traffic-pattern sequence, downwind, base, final, diagram limitations |
 | 14 | 2 | 6 | AIM currency, Part 107, recreational intent, conservative rule choice, FAR/AIM |
@@ -85,15 +79,14 @@ The counts demonstrate coverage, not verbatim transcription. Questions paraphras
 | 77 | 6 | 5 | Lake effect snow, wind speed and lake moisture, moisture-source questions, decision-making on trends, "weather sense" |
 | 78 | 6 | 5 | AC 00-45, standard briefing purpose, abbreviated briefing use, outlook briefing timing, trusting government sources |
 | 79 | 6 | 5 | Observation vs. forecast, MVFR/IFR/LIFR definitions, ceiling impact on sUAS altitude band |
-| 80 | 6 | 3 | Aviation Weather Center (NOAA), flight category color coding, weather-site overview purpose |
+| 80 | 6 | 1 | Aviation Weather Center operated by NOAA/NWS |
 | 81 | 6 | 3 | Prog chart purpose, surface analysis chart contents, chart issuance frequency |
 | 82 | 6 | 2 | Multi-hour prog chart sequences, extended-range planning value |
 | 83 | 6 | 2 | Chart legend importance, short-range forecast chart contents |
-| 84 | 6 | 2 | National Digital Forecast Database (NDFD), varying forecast time ranges by element |
 | 85 | 6 | 3 | TAF coverage area, TEMPO conditions, Graphical Forecasts for Aviation (GFA) tool |
-| 86 | 6 | 3 | PIREP relevance to sUAS, METAR trend analysis, HEMS chart general usefulness |
+| 86 | 6 | 2 | PIREP relevance to sUAS, METAR trend analysis |
 | 87 | 6 | 3 | Radar interpretation caution, visible satellite cloud-height limitation, radar color-coding |
-| 88 | 6 | 2 | dBZ reflectivity units, visible satellite nighttime limitation |
+| 88 | 6 | 1 | Visible satellite nighttime limitation |
 | 89 | 6 | 5 | METAR sky condition codes (OVC/BKN), temperature/dew-point notation, altimeter setting format, vertical visibility |
 | 90 | 6 | 4 | Intensity qualifiers, TS and BR abbreviations, TAF BECMG group |
 | 91 | 6 | 3 | AWOS/ASOS distinction, AUTO designator, AO1/AO2 precipitation-type codes |
@@ -103,15 +96,15 @@ The counts demonstrate coverage, not verbatim transcription. Questions paraphras
 
 ## Totals
 
-- Source pages covered: **94 of 94**
-- Chapter 1/source pages 01–10: **58 concepts**
-- Chapter 2/source pages 11–28: **112 concepts**
+- Source pages with content: **77 of 94** (pages 1, 2, 5, 6, 7, 8, 9, 11, and 84 are intentionally empty — see the exam-relevance filter note above)
+- Chapter 1/source pages 03, 04, 10: **21 concepts**
+- Chapter 2/source pages 12–28: **107 concepts**
 - Chapter 3 (Lesson 3)/source pages 29–42: **70 concepts**
 - Chapter 4 (Lesson 4)/source pages 43–55: **65 concepts**
 - Chapter 5 (Lesson 5)/source pages 56–65: **50 concepts**
-- Chapter 6 (Lesson 6)/source pages 66–94: **112 concepts**
-- Flashcards: **467**
-- MCQs: **467**
-- Figure files used: **15** (7 book-page crops from source pages 01–28, plus 8 original SVG diagrams added for Lessons 3, 4, and 6 — see the image policy in `README.md`)
+- Chapter 6 (Lesson 6)/source pages 66–94: **106 concepts**
+- Flashcards: **419**
+- MCQs: **419**
+- Figure files used: **13** (5 book-page crops from source pages 10, 13, 14, 24, and 28, plus 8 original SVG diagrams for Lessons 3, 4, and 6 — see the image policy in `README.md`)
 
-When adding material, update this audit and keep at least one direct source-page reference on every item.
+When adding material, update this audit, keep at least one direct source-page reference on every item, and apply the exam-relevance filter described in `README.md` before including a new item.
