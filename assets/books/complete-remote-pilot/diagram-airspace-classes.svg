@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family="DM Sans, system-ui, sans-serif">
+  <rect x="0" y="0" width="1000" height="600" fill="#f5f0e7"/>
+
+  <!-- axis -->
+  <line x1="90" y1="40" x2="90" y2="530" stroke="#44516a" stroke-width="2"/>
+  <g fill="#44516a" font-size="16" text-anchor="end">
+    <text x="80" y="45">FL600</text>
+    <line x1="84" y1="40" x2="90" y2="40" stroke="#44516a" stroke-width="2"/>
+    <text x="80" y="95">18,000 MSL</text>
+    <line x1="84" y1="90" x2="90" y2="90" stroke="#44516a" stroke-width="2"/>
+    <text x="80" y="305">10,000</text>
+    <line x1="84" y1="300" x2="90" y2="300" stroke="#44516a" stroke-width="2"/>
+    <text x="80" y="405">4,000</text>
+    <line x1="84" y1="400" x2="90" y2="400" stroke="#44516a" stroke-width="2"/>
+    <text x="80" y="465">2,500</text>
+    <line x1="84" y1="460" x2="90" y2="460" stroke="#44516a" stroke-width="2"/>
+    <text x="80" y="531">SFC</text>
+    <line x1="84" y1="525" x2="90" y2="525" stroke="#44516a" stroke-width="2"/>
+  </g>
+
+  <!-- Class A band -->
+  <rect x="90" y="40" width="890" height="50" fill="#12233f"/>
+  <text x="120" y="70" fill="#fffdf8" font-size="20" font-weight="700">CLASS A</text>
+
+  <!-- Class E fill (background above ground, below 18,000) -->
+  <rect x="90" y="90" width="890" height="410" fill="#d9edf0"/>
+  <text x="120" y="118" fill="#1d7f78" font-size="20" font-weight="700">CLASS E</text>
+
+  <!-- Class G strip near the surface -->
+  <rect x="90" y="500" width="890" height="25" fill="#eae2d3"/>
+  <text x="120" y="518" fill="#44516a" font-size="16" font-weight="700">CLASS G</text>
+
+  <!-- Non-towered airport (Class G/E only) -->
+  <g>
+    <circle cx="218" cy="512" r="6" fill="#12233f"/>
+    <text x="218" y="548" fill="#12233f" font-size="15" text-anchor="middle">Non-towered</text>
+    <text x="218" y="566" fill="#12233f" font-size="15" text-anchor="middle">airport</text>
+  </g>
+
+  <!-- Class D cylinder -->
+  <g>
+    <rect x="380" y="460" width="110" height="65" fill="#1d7f78" fill-opacity="0.35" stroke="#1d7f78" stroke-width="3"/>
+    <circle cx="435" cy="512" r="6" fill="#12233f"/>
+    <text x="435" y="444" fill="#1d7f78" font-size="15" text-anchor="middle" font-weight="700">Class D</text>
+    <text x="435" y="548" fill="#12233f" font-size="14" text-anchor="middle">towered airport</text>
+  </g>
+
+  <!-- Class C two-tier shelf -->
+  <g>
+    <rect x="587" y="400" width="130" height="125" fill="none" stroke="#e45f3c" stroke-width="3"/>
+    <rect x="557" y="300" width="190" height="100" fill="none" stroke="#e45f3c" stroke-width="3"/>
+    <circle cx="652" cy="512" r="6" fill="#12233f"/>
+    <text x="652" y="284" fill="#bf4127" font-size="15" text-anchor="middle" font-weight="700">Class C</text>
+    <text x="652" y="548" fill="#12233f" font-size="14" text-anchor="middle">busy airport</text>
+  </g>
+
+  <!-- Class B upside-down wedding cake: three tiers, each wider higher up -->
+  <g>
+    <rect x="804" y="460" width="130" height="65" fill="none" stroke="#12233f" stroke-width="3"/>
+    <rect x="779" y="380" width="180" height="80" fill="none" stroke="#12233f" stroke-width="3"/>
+    <rect x="759" y="300" width="220" height="80" fill="none" stroke="#12233f" stroke-width="3"/>
+    <circle cx="869" cy="512" r="6" fill="#12233f"/>
+    <text x="869" y="284" fill="#12233f" font-size="15" text-anchor="middle" font-weight="700">Class B</text>
+    <text x="869" y="548" fill="#12233f" font-size="14" text-anchor="middle">major hub airport</text>
+  </g>
+
+  <text x="90" y="580" fill="#44516a" font-size="14">Original schematic, not to scale — shapes vary by location; always confirm with a current chart.</text>
+</svg>

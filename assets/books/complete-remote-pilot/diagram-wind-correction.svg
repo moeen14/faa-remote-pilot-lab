@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="DM Sans, system-ui, sans-serif">
+  <rect x="0" y="0" width="640" height="360" fill="#f5f0e7"/>
+
+  <defs>
+    <marker id="arrow-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#12233f"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1d7f78"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#bf4127"/>
+    </marker>
+  </defs>
+
+  <!-- True course / ground track: the straight baseline -->
+  <line x1="80" y1="280" x2="560" y2="280" stroke="#12233f" stroke-width="4" marker-end="url(#arrow-ink)"/>
+  <text x="320" y="310" fill="#12233f" font-size="17" text-anchor="middle" font-weight="700">True course / ground track</text>
+
+  <!-- True heading + airspeed: angled up into the wind -->
+  <line x1="80" y1="280" x2="520" y2="120" stroke="#1d7f78" stroke-width="4" stroke-dasharray="10,6" marker-end="url(#arrow-teal)"/>
+  <text x="430" y="140" fill="#1d7f78" font-size="17" font-weight="700">True heading (airspeed)</text>
+
+  <!-- Wind vector connecting heading endpoint back to the course line -->
+  <line x1="520" y1="120" x2="560" y2="280" stroke="#bf4127" stroke-width="4" marker-end="url(#arrow-orange)"/>
+  <text x="600" y="200" fill="#bf4127" font-size="17" font-weight="700" text-anchor="end">Wind</text>
+
+  <!-- Wind correction angle arc -->
+  <path d="M160,280 A80,80 0 0,0 145,231" fill="none" stroke="#44516a" stroke-width="2"/>
+  <text x="180" y="240" fill="#44516a" font-size="15" font-weight="700">WCA</text>
+
+  <text x="320" y="30" fill="#12233f" font-size="20" font-weight="700" text-anchor="middle">Correcting for wind drift</text>
+  <text x="320" y="340" fill="#44516a" font-size="14" text-anchor="middle">Original schematic: heading is angled into the wind so the resulting ground track matches the planned course.</text>
+</svg>

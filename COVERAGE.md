@@ -57,6 +57,6 @@ The counts demonstrate coverage, not verbatim transcription. Questions paraphras
 - Chapter 3 (Lesson 3)/source pages 29–42: **70 concepts**
 - Flashcards: **240**
 - MCQs: **240**
-- Figure files used: **7** (no new figure crops added for Lesson 3; see the image-crop policy in `README.md`)
+- Figure files used: **11** (7 book-page crops from source pages 01–28, plus 4 original SVG diagrams added for Lesson 3 — see the image policy in `README.md`)
 
 When adding material, update this audit and keep at least one direct source-page reference on every item.

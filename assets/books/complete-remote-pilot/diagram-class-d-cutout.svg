@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 460" font-family="DM Sans, system-ui, sans-serif">
+  <rect x="0" y="0" width="600" height="460" fill="#f5f0e7"/>
+
+  <!-- Main Class D circle with a notch cut out for a non-tower satellite airport -->
+  <path d="M300,60
+           A190,190 0 1,1 129,205
+           L210,240
+           A70,70 0 0,0 300,270
+           A190,190 0 0,1 300,60 Z"
+        fill="#1d7f78" fill-opacity="0.3" stroke="#1d7f78" stroke-width="4"/>
+
+  <circle cx="330" cy="165" r="6" fill="#12233f"/>
+  <text x="330" y="140" fill="#1d7f78" font-size="20" font-weight="700" text-anchor="middle">CLASS D</text>
+
+  <circle cx="175" cy="222" r="6" fill="#bf4127"/>
+  <text x="120" y="330" fill="#bf4127" font-size="16" font-weight="700" text-anchor="middle">Non-tower airport</text>
+  <text x="120" y="350" fill="#bf4127" font-size="16" text-anchor="middle">(cut out of Class D)</text>
+
+  <text x="300" y="430" fill="#44516a" font-size="14" text-anchor="middle">Original schematic: a cutout excludes a nearby non-tower field from the surrounding Class D area.</text>
+</svg>
