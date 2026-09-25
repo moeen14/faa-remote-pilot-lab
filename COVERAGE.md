@@ -1,6 +1,6 @@
 # Study Coverage Audit
 
-This audit maps the current bank to all 28 numbered source images. Every listed concept produces one flashcard and one MCQ, giving **170 flashcards and 170 MCQs** in total.
+This audit maps the current bank to all 42 numbered source images. Every listed concept produces one flashcard and one MCQ, giving **240 flashcards and 240 MCQs** in total.
 
 The counts demonstrate coverage, not verbatim transcription. Questions paraphrase the source and avoid relying on known OCR errors. Time-sensitive rules include links to current FAA material inside the study interface.
 
@@ -34,14 +34,29 @@ The counts demonstrate coverage, not verbatim transcription. Questions paraphras
 | 26 | 2 | 5 | Privacy, neighborly conduct, Chart Supplement cycle and content, Chart Bulletin |
 | 27 | 2 | 5 | Advisory Circulars, numbering, QR resources, NOTAM timing, staying current |
 | 28 | 2 | 5 | NOTAM keywords RWY, TWY, OTS and COM; MSL versus AGL |
+| 29 | 3 | 5 | Sectional/terminal-area chart scales, revision cycle, Chart Supplement, no chart-carry requirement |
+| 30 | 3 | 5 | Parallels, meridians, prime meridian, latitude-to-distance rule, UTC/Zulu |
+| 31 | 3 | 5 | Nautical mile length, FAA distance units, magnetic variation cause, isogonic lines, UTC conversion |
+| 32 | 3 | 5 | Agonic line, east/west variation correction, wind correction angle, VLOS visual correction |
+| 33 | 3 | 5 | Groundspeed vs. airspeed, obstruction MSL/AGL numbers, group obstruction symbol, terrain awareness |
+| 34 | 3 | 5 | Controlled vs. uncontrolled airspace, NAVAID/airport identifier length, three-letter identifiers, ATC role |
+| 35 | 3 | 5 | Class A floor/ceiling, sUAS exclusion from Class A, Class B floor notation, Class B authorization |
+| 36 | 3 | 5 | Class B primary airports, Washington D.C. no-drone-zone, Class C boundary symbol, part-time Class C |
+| 37 | 3 | 5 | Class C reversion, Class D trigger (tower), Class D boundary symbol, Class D vertical extent, Class E ceiling |
+| 38 | 3 | 5 | Class C sectional excerpts, Class C fraction notation, surface-level Class C floor, Class C/D symbol contrast |
+| 39 | 3 | 5 | Class D cutouts, Class D/E shelves and extensions, Class G location, temporary towers, Tango airways |
+| 40 | 3 | 5 | TRSA symbol, Prohibited Area, Restricted Area control, TFRs, National Security Areas |
+| 41 | 3 | 5 | Warning Areas, Alert Areas, MOA symbol and rules, Military Training Route altitudes |
+| 42 | 3 | 5 | ADIZ, Washington D.C. 30 NM UAS restriction, wildlife refuge boundary, National Park UAS ban, wildlife-harassment penalty |
 
 ## Totals
 
-- Source pages covered: **28 of 28**
+- Source pages covered: **42 of 42**
 - Chapter 1/source pages 01–10: **58 concepts**
 - Chapter 2/source pages 11–28: **112 concepts**
-- Flashcards: **170**
-- MCQs: **170**
-- Figure files used: **7**
+- Chapter 3 (Lesson 3)/source pages 29–42: **70 concepts**
+- Flashcards: **240**
+- MCQs: **240**
+- Figure files used: **7** (no new figure crops added for Lesson 3; see the image-crop policy in `README.md`)
 
 When adding material, update this audit and keep at least one direct source-page reference on every item.

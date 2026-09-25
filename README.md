@@ -2,7 +2,7 @@
 
 Remote Pilot Lab is a responsive, no-build study website for FAA Remote Pilot material. It turns the books and notes in this course folder into active-recall flashcards and self-grading multiple-choice quizzes.
 
-The current bank provides a page-by-page treatment of all 28 available source images from *The Complete Remote Pilot, Second Edition*. It contains **170 focused flashcards and 170 distinct MCQs**, with 5–8 concepts attached to every source page. Learners can still keep sessions small by selecting a chapter, page, topic, and quiz length.
+The current bank provides a page-by-page treatment of all 42 available source images from *The Complete Remote Pilot, Second Edition* (Chapters 1–2 plus Lesson 3, "Airspace and Navigation"). It contains **240 focused flashcards and 240 distinct MCQs**, with 4–8 concepts attached to every source page. Learners can still keep sessions small by selecting a chapter, page, topic, and quiz length.
 
 ## Important context for humans and AI models
 
@@ -13,6 +13,11 @@ The current bank provides a page-by-page treatment of all 28 available source im
 - The existing review found common OCR problems: merged words, bad punctuation or symbols, misspellings, and incorrect reading order on complex pages. Do not generate a new rule or exact quotation solely from imperfect OCR.
 - Regulations change. For operational decisions, use the current CFR, the operator's authorizations, and current FAA material—not this website or the book alone.
 - Quiz state is intentionally kept only in memory. Reloading the page resets the quiz, score, streak, and flashcard markings.
+- **Image-crop policy:** figure crops under `assets/books/complete-remote-pilot/` are kept deliberately few and tightly cropped. Starting with the Lesson 3 (source pages 29–42) content added 2026-09-24, no additional book-figure images were cropped in for this public GitHub Pages site — all new study items are original paraphrased text only. Keep this policy for future source pages unless the site owner explicitly asks for more image crops.
+
+## Change log
+
+- **2026-09-24** — Added source pages 29–42 (Lesson 3, "Airspace and Navigation": charts, geographic coordinates, magnetic variation, wind correction, groundspeed/airspeed, airspace classes A–G, special use airspace, ADIZ, and wildlife refuge areas), based on 14 new page photos in `Photos from Books/.../20260924_19*.jpg`. Bank grew from 170 to 240 flashcards/MCQs. No new figure images were added (see image-crop policy above); all new items are original paraphrased Q&A.
 
 ## Project structure
 
