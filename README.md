@@ -69,7 +69,7 @@ Add a fact row to the `rows` array in `questions.js`. Each fact automatically be
 
 The option order rotates automatically so correct answers do not stay in the same letter position. Figure keys are defined near the top of the file. Keep crops wide enough to include the complete figure, labels, borders, legends, and any cautionary note that changes its meaning. The traffic-pattern crop was specifically rechecked to ensure its left edge, base leg, border, and printed note are present.
 
-Stable IDs are generated from the source page and the row's position on that page. Append new rows instead of silently reordering existing rows when preserving IDs matters. The interface supports 10, 20, 50, 100, or all matching questions.
+Stable IDs are generated from the source page and the row's position on that page. Append new rows instead of silently reordering existing rows when preserving IDs matters. The interface supports 10, 20, 50, 100, all matching questions, or an endless mode that keeps reshuffling and re-serving the filtered pool (with a live running percent-correct) until the learner ends the session.
 
 ## Add another book
 

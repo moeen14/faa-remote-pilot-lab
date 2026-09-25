@@ -26,6 +26,7 @@
     quiz: [],
     quizIndex: 0,
     quizAnswers: [],
+    quizEndless: false,
     currentStreak: 0,
     bestStreak: 0
   };
@@ -201,6 +202,13 @@
   function updateAvailability() {
     const available = filteredQuestions().length;
     const requestedValue = $("#quiz-count").value;
+    if (requestedValue === "endless") {
+      $("#quiz-availability").textContent = available
+        ? `${available} questions match. Endless mode cycles through them on repeat, reshuffled each lap, until you end the session.`
+        : "No questions match these filters.";
+      $("#start-quiz").disabled = available === 0;
+      return;
+    }
     const requested = requestedValue === "all" ? available : Number(requestedValue);
     const used = Math.min(requested, available);
     $("#quiz-availability").textContent = available
@@ -212,7 +220,8 @@
   function startQuiz() {
     const pool = shuffle(filteredQuestions());
     const countValue = $("#quiz-count").value;
-    const count = countValue === "all" ? pool.length : Math.min(Number(countValue), pool.length);
+    state.quizEndless = countValue === "endless";
+    const count = countValue === "all" || state.quizEndless ? pool.length : Math.min(Number(countValue), pool.length);
     state.quiz = pool.slice(0, count);
     state.quizIndex = 0;
     state.quizAnswers = [];
@@ -225,12 +234,22 @@
     renderQuestion();
   }
 
+  function liveScoreLabel() {
+    const correct = state.quizAnswers.filter((answer) => answer.correct).length;
+    const total = state.quizAnswers.length;
+    const percent = total ? Math.round((correct / total) * 100) : 0;
+    return total ? `${correct}/${total} correct (${percent}%)` : "0 correct";
+  }
+
   function renderQuestion() {
     const question = state.quiz[state.quizIndex];
-    const progress = ((state.quizIndex + 1) / state.quiz.length) * 100;
-    const correct = state.quizAnswers.filter((answer) => answer.correct).length;
-    $("#quiz-progress-label").textContent = `Question ${state.quizIndex + 1} of ${state.quiz.length}`;
-    $("#quiz-live-score").textContent = `${correct} correct`;
+    $("#quiz-progress-label").textContent = state.quizEndless
+      ? `Question ${state.quizIndex + 1} · endless mode`
+      : `Question ${state.quizIndex + 1} of ${state.quiz.length}`;
+    $("#quiz-live-score").textContent = liveScoreLabel();
+    const progress = state.quizEndless
+      ? (state.quizAnswers.length ? (state.quizAnswers.filter((a) => a.correct).length / state.quizAnswers.length) * 100 : 0)
+      : ((state.quizIndex + 1) / state.quiz.length) * 100;
     $("#quiz-progress-bar").style.width = `${progress}%`;
     $("#quiz-tags").replaceChildren(tagNodes(question));
     $("#quiz-question").textContent = question.question;
@@ -298,17 +317,33 @@
     source.append(sourceNode(question));
     feedback.replaceChildren(verdict, explanation, source);
     feedback.hidden = false;
-    $("#quiz-live-score").textContent = `${state.quizAnswers.filter((answer) => answer.correct).length} correct`;
+    $("#quiz-live-score").textContent = liveScoreLabel();
+    const progress = state.quizEndless
+      ? (state.quizAnswers.filter((a) => a.correct).length / state.quizAnswers.length) * 100
+      : ((state.quizIndex + 1) / state.quiz.length) * 100;
+    $("#quiz-progress-bar").style.width = `${progress}%`;
     const nextButton = $("#next-question");
-    nextButton.textContent = state.quizIndex === state.quiz.length - 1 ? "See result →" : "Next question →";
+    nextButton.textContent = (!state.quizEndless && state.quizIndex === state.quiz.length - 1) ? "See result →" : "Next question →";
     nextButton.hidden = false;
     nextButton.focus({ preventScroll: true });
   }
 
   function nextQuestion() {
     if (state.quizAnswers.length <= state.quizIndex) return;
-    if (state.quizIndex >= state.quiz.length - 1) finishQuiz();
-    else {
+    if (state.quizIndex >= state.quiz.length - 1) {
+      if (state.quizEndless) {
+        const lastQuestion = state.quiz[state.quizIndex];
+        let nextLap = shuffle(filteredQuestions());
+        if (nextLap.length > 1 && nextLap[0].id === lastQuestion.id) {
+          nextLap.push(nextLap.shift());
+        }
+        state.quiz = state.quiz.concat(nextLap);
+        state.quizIndex += 1;
+        renderQuestion();
+      } else {
+        finishQuiz();
+      }
+    } else {
       state.quizIndex += 1;
       renderQuestion();
     }
