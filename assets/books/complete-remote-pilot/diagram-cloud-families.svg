@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="DM Sans, system-ui, sans-serif">
+  <rect x="0" y="0" width="900" height="620" fill="#f5f0e7"/>
+
+  <line x1="120" y1="50" x2="120" y2="560" stroke="#44516a" stroke-width="2"/>
+  <g fill="#44516a" font-size="15" text-anchor="end">
+    <text x="110" y="55">45,000 ft</text>
+    <text x="110" y="185">23,000 ft</text>
+    <text x="110" y="345">6,500 ft</text>
+    <text x="110" y="560">Surface</text>
+  </g>
+
+  <!-- High family band -->
+  <rect x="120" y="50" width="740" height="140" fill="#d9edf0"/>
+  <text x="150" y="80" fill="#1d7f78" font-size="18" font-weight="700">HIGH — Cirrus, cirrocumulus, cirrostratus</text>
+
+  <!-- Middle family band -->
+  <rect x="120" y="190" width="740" height="160" fill="#eae2d3"/>
+  <text x="150" y="220" fill="#bf4127" font-size="18" font-weight="700">MIDDLE — Altocumulus, altostratus</text>
+
+  <!-- Low family band -->
+  <rect x="120" y="350" width="740" height="210" fill="#fffdf8"/>
+  <text x="150" y="380" fill="#12233f" font-size="18" font-weight="700">LOW — Stratus, stratocumulus, cumulus</text>
+
+  <!-- Vertical development cloud, spanning all bands -->
+  <g>
+    <path d="M700,555 q-40,-40 -20,-90 q-30,-10 -20,-50 q-25,-10 -10,-45 q-20,-15 0,-40 q10,-30 45,-30 q15,-25 45,-15 q30,-15 50,10 q30,-5 35,25 q25,10 10,40 q20,20 -5,45 q10,35 -20,45 q0,30 -35,35 q-10,20 -35,15 q-15,15 -40,5 z"
+          fill="#c8c2b6" stroke="#44516a" stroke-width="2"/>
+  </g>
+  <text x="700" y="595" fill="#44516a" font-size="16" text-anchor="middle" font-weight="700">Vertical development — cumulonimbus</text>
+
+  <text x="450" y="15" fill="#12233f" font-size="20" font-weight="700" text-anchor="middle">Cloud Families by Altitude</text>
+</svg>

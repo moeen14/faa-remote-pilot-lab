@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="DM Sans, system-ui, sans-serif">
+  <rect x="0" y="0" width="900" height="700" fill="#f5f0e7"/>
+
+  <!-- Runway -->
+  <rect x="410" y="260" width="40" height="220" fill="#12233f"/>
+  <text x="430" y="255" fill="#12233f" font-size="16" text-anchor="middle" font-weight="700">Runway</text>
+
+  <defs>
+    <marker id="arrow-teal2" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1d7f78"/>
+    </marker>
+  </defs>
+
+  <g fill="none" stroke="#1d7f78" stroke-width="4" marker-end="url(#arrow-teal2)">
+    <!-- Upwind/departure leg -->
+    <line x1="430" y1="260" x2="430" y2="120"/>
+    <!-- Crosswind -->
+    <line x1="430" y1="120" x2="620" y2="120"/>
+    <!-- Downwind -->
+    <line x1="620" y1="120" x2="620" y2="480"/>
+    <!-- Base -->
+    <line x1="620" y1="480" x2="450" y2="480"/>
+    <!-- Final -->
+    <line x1="450" y1="480" x2="430" y2="480"/>
+  </g>
+
+  <!-- 45 degree entry -->
+  <line x1="720" y1="360" x2="620" y2="300" stroke="#e45f3c" stroke-width="4" marker-end="url(#arrow-teal2)"/>
+
+  <g font-size="16" fill="#12233f" font-weight="700">
+    <text x="440" y="190">Upwind /</text>
+    <text x="440" y="208">departure</text>
+    <text x="500" y="105">Crosswind</text>
+    <text x="635" y="300">Downwind</text>
+    <text x="500" y="505">Base</text>
+    <text x="330" y="440">Final</text>
+    <text x="700" y="345" fill="#bf4127">45&#176; entry</text>
+  </g>
+
+  <text x="450" y="600" fill="#44516a" font-size="15" text-anchor="middle">Original schematic of the standard left-hand traffic pattern (not to scale).</text>
+</svg>

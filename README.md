@@ -2,7 +2,7 @@
 
 Remote Pilot Lab is a responsive, no-build study website for FAA Remote Pilot material. It turns the books and notes in this course folder into active-recall flashcards and self-grading multiple-choice quizzes.
 
-The current bank provides a page-by-page treatment of all 42 available source images from *The Complete Remote Pilot, Second Edition* (Chapters 1–2 plus Lesson 3, "Airspace and Navigation"). It contains **240 focused flashcards and 240 distinct MCQs**, with 4–8 concepts attached to every source page. Learners can still keep sessions small by selecting a chapter, page, topic, and quiz length.
+The current bank provides a page-by-page treatment of all 94 available source images from *The Complete Remote Pilot, Second Edition* (Chapters 1–2 plus Lesson 3 "Airspace and Navigation", Lesson 4 "Airport and Off-Airport Operations", Lesson 5 "Radio Communication Procedures", and Lesson 6 "Weather"). It contains **467 focused flashcards and 467 distinct MCQs**, with 2–8 concepts attached to every source page. Learners can still keep sessions small by selecting a chapter, page, topic, and quiz length.
 
 ## Important context for humans and AI models
 
@@ -17,7 +17,8 @@ The current bank provides a page-by-page treatment of all 42 available source im
 
 ## Change log
 
-- **2026-09-24** — Added source pages 29–42 (Lesson 3, "Airspace and Navigation": charts, geographic coordinates, magnetic variation, wind correction, groundspeed/airspeed, airspace classes A–G, special use airspace, ADIZ, and wildlife refuge areas), based on 14 new page photos in `Photos from Books/.../20260924_19*.jpg`. Bank grew from 170 to 240 flashcards/MCQs. All new study text is original paraphrased Q&A; four original SVG diagrams were added instead of new book-page crops (see the image policy above).
+- **2026-09-24** — Added source pages 29–42 (Lesson 3, "Airspace and Navigation": charts, geographic coordinates, magnetic variation, wind correction, groundspeed/airspeed, airspace classes A–G, special use airspace, ADIZ, and wildlife refuge areas). Bank grew from 170 to 240 flashcards/MCQs. All new study text is original paraphrased Q&A; four original SVG diagrams were added instead of new book-page crops (see the image policy above).
+- **2026-09-24** — Added source pages 43–94 (Lesson 4 "Airport and Off-Airport Operations", Lesson 5 "Radio Communication Procedures", Lesson 6 "Weather"), based on 52 new page photos renamed `43.jpg`–`94.jpg` in `Photos from Books/.../`. Bank grew from 240 to 467 flashcards/MCQs across three new chapters (4, 5, 6). Four more original SVG diagrams were added (traffic pattern, front symbols, cloud families, thunderstorm life cycle) — still no new book-page crops. Several source pages in this batch were screenshots of government (NOAA/FAA) websites or standardized reference tables (METAR/TAF key, phonetic alphabet); these were represented as original paraphrased text facts rather than cropped, consistent with the image policy.
 
 ## Project structure
 

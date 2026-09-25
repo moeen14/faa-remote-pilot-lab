@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="DM Sans, system-ui, sans-serif">
+  <rect x="0" y="0" width="900" height="460" fill="#f5f0e7"/>
+
+  <text x="450" y="45" fill="#12233f" font-size="24" font-weight="700" text-anchor="middle">Weather Front Symbols</text>
+
+  <!-- Cold front -->
+  <g>
+    <line x1="60" y1="120" x2="420" y2="120" stroke="#1d4ed8" stroke-width="4"/>
+    <path d="M100,120 l18,-16 l18,16" fill="none" stroke="#1d4ed8" stroke-width="4"/>
+    <path d="M180,120 l18,-16 l18,16" fill="none" stroke="#1d4ed8" stroke-width="4"/>
+    <path d="M260,120 l18,-16 l18,16" fill="none" stroke="#1d4ed8" stroke-width="4"/>
+    <text x="450" y="128" fill="#12233f" font-size="18" font-weight="700">Cold front — blue, triangles point toward warm air</text>
+  </g>
+
+  <!-- Warm front -->
+  <g>
+    <line x1="60" y1="200" x2="420" y2="200" stroke="#bf4127" stroke-width="4"/>
+    <path d="M100,200 a18,16 0 0 1 36,0" fill="none" stroke="#bf4127" stroke-width="4"/>
+    <path d="M180,200 a18,16 0 0 1 36,0" fill="none" stroke="#bf4127" stroke-width="4"/>
+    <path d="M260,200 a18,16 0 0 1 36,0" fill="none" stroke="#bf4127" stroke-width="4"/>
+    <text x="450" y="208" fill="#12233f" font-size="18" font-weight="700">Warm front — red, semicircles point toward cold air</text>
+  </g>
+
+  <!-- Occluded front -->
+  <g>
+    <line x1="60" y1="280" x2="420" y2="280" stroke="#7c3aed" stroke-width="4"/>
+    <path d="M100,280 l18,-16 l18,16" fill="none" stroke="#7c3aed" stroke-width="4"/>
+    <path d="M180,280 a18,16 0 0 1 36,0" fill="none" stroke="#7c3aed" stroke-width="4"/>
+    <path d="M260,280 l18,-16 l18,16" fill="none" stroke="#7c3aed" stroke-width="4"/>
+    <text x="450" y="288" fill="#12233f" font-size="18" font-weight="700">Occluded front — purple, alternating triangles and semicircles</text>
+  </g>
+
+  <!-- Stationary front -->
+  <g>
+    <line x1="60" y1="360" x2="420" y2="360" stroke="#bf4127" stroke-width="4"/>
+    <path d="M100,360 l18,-16 l18,16" fill="none" stroke="#1d4ed8" stroke-width="4"/>
+    <path d="M180,360 a18,16 0 0 0 36,0" fill="none" stroke="#bf4127" stroke-width="4"/>
+    <path d="M260,360 l18,-16 l18,16" fill="none" stroke="#1d4ed8" stroke-width="4"/>
+    <text x="450" y="368" fill="#12233f" font-size="18" font-weight="700">Stationary front — alternating red and blue markers</text>
+  </g>
+
+  <text x="450" y="430" fill="#44516a" font-size="14" text-anchor="middle">Original rendering of the standard meteorological front symbol convention.</text>
+</svg>
