@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="DM Sans, system-ui, sans-serif">
+  <rect x="0" y="0" width="640" height="360" fill="#f5f0e7"/>
+
+  <defs>
+    <marker id="axes-arrow-ink" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#12233f"/>
+    </marker>
+    <marker id="axes-arrow-teal" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1d7f78"/>
+    </marker>
+    <marker id="axes-arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#bf4127"/>
+    </marker>
+  </defs>
+
+  <text x="320" y="28" fill="#12233f" font-size="20" font-weight="700" text-anchor="middle">Aircraft axes and rotation</text>
+
+  <!-- Simple fixed-wing silhouette: fuselage + wing + tail -->
+  <line x1="150" y1="200" x2="490" y2="200" stroke="#44516a" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="290,140 350,140 400,200 240,200" fill="#dfe6ee" stroke="#44516a" stroke-width="2"/>
+  <polygon points="440,175 490,175 490,200 460,200" fill="#dfe6ee" stroke="#44516a" stroke-width="2"/>
+  <polygon points="470,150 490,150 490,175 480,175" fill="#dfe6ee" stroke="#44516a" stroke-width="2"/>
+
+  <!-- Longitudinal axis (roll): nose to tail -->
+  <line x1="120" y1="200" x2="530" y2="200" stroke="#12233f" stroke-width="3" stroke-dasharray="9,6" marker-end="url(#axes-arrow-ink)"/>
+  <text x="530" y="222" fill="#12233f" font-size="15" font-weight="700" text-anchor="end">Longitudinal axis — ROLL</text>
+
+  <!-- Lateral axis (pitch): wingtip to wingtip -->
+  <line x1="320" y1="90" x2="320" y2="290" stroke="#1d7f78" stroke-width="3" stroke-dasharray="9,6" marker-end="url(#axes-arrow-teal)"/>
+  <text x="330" y="100" fill="#1d7f78" font-size="15" font-weight="700">Lateral axis — PITCH</text>
+
+  <!-- Vertical axis (yaw) -->
+  <line x1="320" y1="200" x2="320" y2="330" stroke="#bf4127" stroke-width="3" stroke-dasharray="2,5" marker-end="url(#axes-arrow-orange)" transform="rotate(35 320 200)"/>
+  <text x="360" y="320" fill="#bf4127" font-size="15" font-weight="700">Vertical axis — YAW</text>
+
+  <text x="320" y="350" fill="#44516a" font-size="13" text-anchor="middle">Original schematic: ailerons roll about the longitudinal axis, the elevator pitches about the lateral axis, the rudder yaws about the vertical axis.</text>
+</svg>

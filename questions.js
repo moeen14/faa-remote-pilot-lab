@@ -1,13 +1,9 @@
-/* Remote Pilot Lab: complete study bank for source pages 01–94. */
+/* Remote Pilot Lab: FAA Part 107 (UAG) study bank, built from public FAA regulatory and ACS material. */
 (() => {
   "use strict";
 
-  const sources = {};
-  for (let page = 1; page <= 94; page += 1) {
-    const number = String(page).padStart(2, "0");
-    sources[`book-${number}`] = { label: `Book · source image ${number}` };
-  }
-  Object.assign(sources, {
+  const sources = {
+    "faa-acs": { label: "FAA · UAG Airman Certification Standards", url: "https://www.faa.gov/training_testing/testing/acs" },
     "faa-part107": { label: "FAA · Part 107 overview", url: "https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107" },
     "faa-pilot": { label: "FAA · Become a Drone Pilot", url: "https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot" },
     "faa-accident": { label: "FAA · Accident reporting", url: "https://www.faa.gov/faq/when-do-i-need-report-accident" },
@@ -15,23 +11,50 @@
     "faa-people": { label: "FAA · Operations Over People", url: "https://www.faa.gov/uas/commercial_operators/operations_over_people" },
     "faa-waivers": { label: "FAA · Part 107 waivers", url: "https://www.faa.gov/uas/commercial_operators/part_107_waivers" },
     "faa-recreation": { label: "FAA · Recreational flyers", url: "https://www.faa.gov/uas/recreational_flyers" },
-    "faa-register": { label: "FAA · Registration and Remote ID", url: "https://www.faa.gov/uas/getting_started/register_drone" }
-  });
+    "faa-register": { label: "FAA · Registration and Remote ID", url: "https://www.faa.gov/uas/getting_started/register_drone" },
+    "faa-phak": { label: "FAA · Pilot's Handbook of Aeronautical Knowledge", url: "https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/phak" },
+    "faa-weather": { label: "FAA · Aviation Weather (AC 00-6B)", url: "https://www.faa.gov/regulations_policies/advisory_circulars" },
+    "ecfr-107": { label: "eCFR · 14 CFR Part 107", url: "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107" }
+  };
+
+  // Maps each item's fine-grained `topic` label to one of the FAA UAG Airman Certification Standards knowledge areas.
+  const topicDomains = {
+    "Language": "Regulations", "Regulations": "Regulations", "Publications": "Regulations",
+    "Certification": "Regulations", "Operating rules": "Regulations", "Operating limits": "Regulations",
+    "Compliance": "Regulations", "Operating roles": "Regulations", "Moving vehicles": "Regulations",
+    "Local rules": "Regulations", "Waivers": "Regulations", "Privacy": "Regulations",
+    "Right of way": "Regulations", "Night operations": "Regulations", "Knowledge areas": "Regulations",
+    "Federalism": "Regulations", "Currency": "Regulations", "Operations": "Regulations",
+    "Operations over people": "Regulations", "Remote ID": "Remote ID & Registration",
+    "Weather": "Weather", "Time": "Weather",
+    "Airspace": "Airspace", "NOTAMs": "Airspace", "Special use airspace": "Airspace", "Altitude": "Airspace",
+    "Charts": "Charts & Navigation", "Navigation": "Charts & Navigation",
+    "Airports": "Airport Operations", "Airport operations": "Airport Operations",
+    "Accident reporting": "Emergency Procedures", "NTSB reporting": "Emergency Procedures",
+    "Emergencies": "Emergency Procedures", "Emergency operations": "Emergency Procedures",
+    "Professionalism": "Crew Resource Management", "Crew briefing": "Crew Resource Management",
+    "Crew Resource Management": "Crew Resource Management",
+    "Human factors": "Physiology",
+    "Flight controls": "Loading & Performance", "Aerodynamics": "Loading & Performance",
+    "Control link": "Loading & Performance",
+    "Loading & Performance": "Loading & Performance",
+    "Aeronautical Decision-Making": "Aeronautical Decision-Making",
+    "Radio Communications": "Radio Communications",
+    "Physiology": "Physiology",
+    "Preflight": "Maintenance & Inspection",
+    "Maintenance & Inspection": "Maintenance & Inspection"
+  };
 
   const figures = {
-    axes: ["assets/books/complete-remote-pilot/page-10-aircraft-components.jpg", "Flight controls, roll, pitch, yaw, and aircraft axes"],
-    pattern: ["assets/books/complete-remote-pilot/page-13-traffic-pattern.jpg", "Complete traffic-pattern figure with the left border, base leg, and note"],
-    publications: ["assets/books/complete-remote-pilot/page-14-faa-publications.jpg", "Federal Aviation Regulations and AIM publications"],
-    laanc: ["assets/books/complete-remote-pilot/page-24-airspace-diagram.jpg", "FAA UAS Data Exchange and LAANC diagram"],
-    notams: ["assets/books/complete-remote-pilot/page-28-vfr-sectional-chart.jpg", "Airport diagram and NOTAM keyword examples"],
-    meridiansDiagram: ["assets/books/complete-remote-pilot/diagram-meridians-parallels.svg", "Original schematic globe showing meridians (longitude) and parallels (latitude)"],
-    airspaceClasses: ["assets/books/complete-remote-pilot/diagram-airspace-classes.svg", "Original schematic cross-section of Class A through G airspace stacked over sample airports"],
-    classDCutout: ["assets/books/complete-remote-pilot/diagram-class-d-cutout.svg", "Original schematic of a Class D cutout excluding a nearby non-tower airport"],
-    windCorrection: ["assets/books/complete-remote-pilot/diagram-wind-correction.svg", "Original schematic vector triangle showing true heading, wind, and resulting ground track"],
-    trafficPattern: ["assets/books/complete-remote-pilot/diagram-traffic-pattern.svg", "Original schematic of the standard left-hand airport traffic pattern"],
-    frontSymbols: ["assets/books/complete-remote-pilot/diagram-front-symbols.svg", "Original rendering of the standard cold, warm, occluded, and stationary front symbols"],
-    cloudFamilies: ["assets/books/complete-remote-pilot/diagram-cloud-families.svg", "Original schematic of low, middle, high, and vertical-development cloud families by altitude"],
-    thunderstormCycle: ["assets/books/complete-remote-pilot/diagram-thunderstorm-cycle.svg", "Original schematic of the cumulus, mature, and dissipating stages of a thunderstorm"]
+    aircraftAxes: ["assets/diagrams/aircraft-axes.svg", "Original schematic of the longitudinal (roll), lateral (pitch), and vertical (yaw) aircraft axes"],
+    meridiansDiagram: ["assets/diagrams/meridians-parallels.svg", "Original schematic globe showing meridians (longitude) and parallels (latitude)"],
+    airspaceClasses: ["assets/diagrams/airspace-classes.svg", "Original schematic cross-section of Class A through G airspace stacked over sample airports"],
+    classDCutout: ["assets/diagrams/class-d-cutout.svg", "Original schematic of a Class D cutout excluding a nearby non-tower airport"],
+    windCorrection: ["assets/diagrams/wind-correction.svg", "Original schematic vector triangle showing true heading, wind, and resulting ground track"],
+    trafficPattern: ["assets/diagrams/traffic-pattern.svg", "Original schematic of the standard left-hand airport traffic pattern"],
+    frontSymbols: ["assets/diagrams/front-symbols.svg", "Original rendering of the standard cold, warm, occluded, and stationary front symbols"],
+    cloudFamilies: ["assets/diagrams/cloud-families.svg", "Original schematic of low, middle, high, and vertical-development cloud families by altitude"],
+    thunderstormCycle: ["assets/diagrams/thunderstorm-cycle.svg", "Original schematic of the cumulus, mature, and dissipating stages of a thunderstorm"]
   };
 
   // page, topic, prompt, answer, three distractors, explanation, optional figure, optional current FAA verification
@@ -54,11 +77,11 @@
     [4,"Operating rules","What does VLOS mean operationally?","Seeing the aircraft with unaided vision other than corrective lenses",["Seeing only its camera feed","Tracking it only on a map","Seeing it with the aid of binoculars at all times"],"VLOS supports awareness of attitude, location, direction, and hazards."],
     [4,"Weather","What is the difference between a METAR and a TAF?","A METAR reports observed airport weather; a TAF forecasts airport weather",["A METAR forecasts airport weather; a TAF reports observed weather","A METAR and a TAF are the same report under different names","A TAF applies only to military airports"],"Both use standardized coded aviation weather formats."],
 
-    [10,"Flight controls","Roll is rotation about which axis?","The longitudinal nose-to-tail axis",["Vertical","Lateral wingtip-to-wingtip","Runway centerline"],"Ailerons are the primary fixed-wing roll control.","axes"],
-    [10,"Flight controls","Pitch is rotation about which axis?","The lateral wingtip-to-wingtip axis",["Longitudinal","Vertical","Magnetic"],"The elevator is the primary fixed-wing pitch control.","axes"],
-    [10,"Flight controls","Yaw is rotation about which axis?","The vertical axis",["Longitudinal","Lateral","Camera"],"The rudder is the primary fixed-wing yaw control.","axes"],
-    [10,"Flight controls","Which fixed-wing surface primarily commands roll?","Ailerons",["Elevator","Rudder","Landing gear"],"Differential aileron movement changes lift across the wings.","axes"],
-    [10,"Flight controls","Which fixed-wing surface primarily commands pitch?","Elevator",["Ailerons","Rudder","Propeller"],"Elevator deflection changes pitching moment about the lateral axis.","axes"],
+    [10,"Flight controls","Roll is rotation about which axis?","The longitudinal nose-to-tail axis",["Vertical","Lateral wingtip-to-wingtip","Runway centerline"],"Ailerons are the primary fixed-wing roll control.","aircraftAxes"],
+    [10,"Flight controls","Pitch is rotation about which axis?","The lateral wingtip-to-wingtip axis",["Longitudinal","Vertical","Magnetic"],"The elevator is the primary fixed-wing pitch control.","aircraftAxes"],
+    [10,"Flight controls","Yaw is rotation about which axis?","The vertical axis",["Longitudinal","Lateral","Camera"],"The rudder is the primary fixed-wing yaw control.","aircraftAxes"],
+    [10,"Flight controls","Which fixed-wing surface primarily commands roll?","Ailerons",["Elevator","Rudder","Landing gear"],"Differential aileron movement changes lift across the wings.","aircraftAxes"],
+    [10,"Flight controls","Which fixed-wing surface primarily commands pitch?","Elevator",["Ailerons","Rudder","Propeller"],"Elevator deflection changes pitching moment about the lateral axis.","aircraftAxes"],
 
     [12,"Publications","Why should pilots prefer current FAA publications?","Rules, procedures, and operational information change",["FAA publications never change once published","Third-party copies are always kept current automatically","Only digital editions contain accurate information"],"Third-party copies may be incomplete or out of date."],
     [12,"Publications","What is the AIM?","Aeronautical Information Manual",["Aircraft Inspection Mandate","Airspace Identification Map","Automated Incident Message"],"It is a major reference for aviation procedures."],
@@ -66,17 +89,17 @@
     [12,"Publications","What glossary is included in the AIM?","Pilot/Controller Glossary",["An Airport/Facility Directory legend","A weight-and-balance glossary","A drone registration glossary"],"It standardizes terms used by pilots and controllers."],
     [12,"Publications","What is a good first stop for a current FAA publication?","The FAA website",["An old screenshot","An unverified post","A decade-old summary"],"Confirm the publication's revision date."],
 
-    [13,"Airport operations","Starting after takeoff, what sequence names the pattern legs shown?","Upwind, crosswind, downwind, base, final",["Final, base, downwind, crosswind, upwind","Downwind, final, upwind, base, crosswind","Crosswind, base, upwind, final, downwind"],"These are standard traffic-pattern segment names.","pattern"],
-    [13,"Airport operations","Which leg is parallel to the runway opposite the landing direction?","Downwind",["Base","Final","Crosswind"],"Aircraft on downwind travel opposite the intended landing direction.","pattern"],
-    [13,"Airport operations","Which leg connects downwind to final?","Base",["Upwind","Departure","Crosswind"],"Base is generally at right angles to the runway near its approach end.","pattern"],
-    [13,"Airport operations","What is final approach?","Flight along the extended runway centerline toward landing",["Flight opposite landing","The first turn after takeoff","Taxi from parking"],"It begins after the turn from base in the illustration.","pattern"],
-    [13,"Airport operations","What warning accompanies the traffic-pattern figure?","It teaches terminology, not a universal pattern-entry method",["It applies only to helicopters","It replaces tower instructions","It depicts a required UAS route"],"Actual procedures depend on the airport, traffic, airspace, and instructions.","pattern"],
+    [13,"Airport operations","Starting after takeoff, what sequence names the pattern legs shown?","Upwind, crosswind, downwind, base, final",["Final, base, downwind, crosswind, upwind","Downwind, final, upwind, base, crosswind","Crosswind, base, upwind, final, downwind"],"These are standard traffic-pattern segment names.","trafficPattern"],
+    [13,"Airport operations","Which leg is parallel to the runway opposite the landing direction?","Downwind",["Base","Final","Crosswind"],"Aircraft on downwind travel opposite the intended landing direction.","trafficPattern"],
+    [13,"Airport operations","Which leg connects downwind to final?","Base",["Upwind","Departure","Crosswind"],"Base is generally at right angles to the runway near its approach end.","trafficPattern"],
+    [13,"Airport operations","What is final approach?","Flight along the extended runway centerline toward landing",["Flight opposite landing","The first turn after takeoff","Taxi from parking"],"It begins after the turn from base on a standard pattern diagram.","trafficPattern"],
+    [13,"Airport operations","Why should a remote pilot recognize the standard traffic pattern even though small UAS rarely fly it?","Manned aircraft use it, so a remote pilot must anticipate where crewed traffic will be near an airport",["It is a mandatory route for every small UAS","It applies only to helicopters","It replaces the need for any airport-specific procedures"],"Actual procedures depend on the airport, traffic, airspace, and instructions in effect.","trafficPattern"],
 
     [14,"Publications","Why should an old AIM be treated cautiously?","It may omit later procedural and regulatory changes",["It only covers international operations","It becomes legally binding regulatory text","It applies only to Part 61 pilots"],"Check the current edition and changes."],
     [14,"Regulations","What is Part 107's role?","It supplies principal rules for civil small-UAS operations not qualifying for another exception",["It governs only airline operations","It applies only to recreational flyers","It fully replaces all state and local law"],"The regulatory path depends on the operation's purpose and circumstances."],
-    [14,"Regulations","What generally determines whether a flight is recreational?","The actual purpose and intent of the flight",["Whether it has a camera","Whether the pilot is paid that day","Whether it is a weekend"],"The exception applies only when flown strictly for recreation.","publications","faa-recreation"],
+    [14,"Regulations","What generally determines whether a flight is recreational?","The actual purpose and intent of the flight",["Whether it has a camera","Whether the pilot is paid that day","Whether it is a weekend"],"The exception applies only when flown strictly for recreation.",null,"faa-recreation"],
     [14,"Regulations","When uncertain whether a flight fits the recreational exception, what conservative path does the book recommend?","Operate under Part 107",["Ignore both rule sets","Call it recreational later","Use only local law"],"The recreational exception has specific conditions.",null,"faa-recreation"],
-    [14,"Publications","What combines regulations and explanatory information in a common pilot reference?","A FAR/AIM publication",["A TAF/METAR report","A Remote Pilot Certificate","A Chart Supplement"],"Commercial editions often package the FAR and AIM together.","publications"],
+    [14,"Publications","What combines regulations and explanatory information in a common pilot reference?","A FAR/AIM publication",["A TAF/METAR report","A Remote Pilot Certificate","A Chart Supplement"],"Commercial editions often package the FAR and AIM together."],
     [14,"Regulations","If one rule does not prohibit something, does that alone prove it safe and authorized?","No; other rules, airspace requirements, and risk controls may apply",["Yes, always","Yes, if small","Yes, if no one complains"],"Read the full applicable rule set."],
 
     [15,"Regulations","What are Part 107's five subparts?","General; Operating Rules; Certification; Operations Over Human Beings; Waivers",["Weather; Airports; Engines; Navigation; Records","Local; State; Federal; Military; Foreign","Registration; Insurance; Taxes; Privacy; Photography"],"The structure helps locate a requirement."],
@@ -157,8 +180,8 @@
     [24,"Waivers","What is a Part 107 waiver?","FAA approval for a described operation outside specified limitations",["An exemption from all federal aviation law","A local property-use permit","An aircraft registration"],"Waivers are case-specific and require a safety case.",null,"faa-waivers"],
     [24,"Waivers","Where are waiver applications submitted?","FAA DroneZone",["Through IACRA","By mail to the local FSDO only","Over the CTAF frequency"],"Follow current instructions and answer FAA requests.",null,"faa-waivers"],
     [24,"Emergency operations","What does the Special Governmental Interest process support?","Expedited consideration for qualifying emergency or disaster operations",["Routine recreation","Automatic pilot certification","Permanent prohibited-area access"],"Examples include firefighting, rescue, law enforcement, restoration, assessment, and crucial media."],
-    [24,"Airspace","What data can LAANC evaluate?","Facility maps, airspace, airports, special-use areas, TFRs, and NOTAMs",["The pilot's certificate number only","The aircraft's paint color","Only local property boundaries"],"Approved suppliers exchange request data with FAA systems.","laanc","faa-laanc"],
-    [24,"Airspace","Does LAANC eliminate other preflight checks?","No",["Yes, completely","Only for recreation","Only at night"],"Authorization is limited by location, time, altitude, and conditions.","laanc","faa-laanc"],
+    [24,"Airspace","What data can LAANC evaluate?","Facility maps, airspace, airports, special-use areas, TFRs, and NOTAMs",["The pilot's certificate number only","The aircraft's paint color","Only local property boundaries"],"Approved suppliers exchange request data with FAA systems.",null,"faa-laanc"],
+    [24,"Airspace","Does LAANC eliminate other preflight checks?","No",["Yes, completely","Only for recreation","Only at night"],"Authorization is limited by location, time, altitude, and conditions.",null,"faa-laanc"],
 
     [25,"Local rules","What does ignorantia juris neminem excusat mean?","Ignorance of the law is not an excuse",["Local rules never apply","Federal rules can be ignored","Every flight needs a court order"],"Research applicable federal, state, local, and site requirements."],
     [25,"Local rules","Why can drone rules vary by location?","Different authorities regulate different matters within their powers",["FAA regulations legally vary by state","Airspace classification has no legal basis","Only federal law can ever apply to a flight"],"Airspace, land use, privacy, trespass, and police powers differ."],
@@ -178,11 +201,11 @@
     [27,"NOTAMs","Why check NOTAMs close to departure?","Restrictions and hazards can appear with little warning",["They never change","They concern airlines only","They are indoor only"],"TFRs can affect a familiar site."],
     [27,"Currency","How should a pilot stay current?","Monitor official FAA changes and reputable aviation safety information",["Use only the first textbook edition","Ignore proposals","Use only comments"],"The FAA is authoritative for its rules and policies."],
 
-    [28,"NOTAMs","What does the keyword RWY identify?","A runway-related condition",["A frequency change","A fuel issue","An obstacle outage"],"A runway closure begins with RWY.","notams"],
-    [28,"NOTAMs","What does the keyword TWY identify?","A taxiway-related condition",["A runway closure","A navigation outage","An airshow"],"The example reports taxiway lights out.","notams"],
-    [28,"NOTAMs","In a NOTAM, what does OTS mean?","Out of service",["On the surface","Over the station","Open to sUAS"],"It can describe unavailable lights, beacons, aids, or communications.","notams"],
-    [28,"Altitude","How do MSL and AGL differ in an obstacle NOTAM?","MSL is elevation above sea level; AGL is height above local ground",["They are identical","MSL is distance","AGL is a frequency"],"An obstacle may be reported with both values.","notams"],
-    [28,"NOTAMs","What does the keyword COM identify?","A communications-related condition",["A runway condition","An apron closure","An obstacle"],"The example reports an ATIS frequency out of service.","notams"],
+    [28,"NOTAMs","What does the keyword RWY identify?","A runway-related condition",["A frequency change","A fuel issue","An obstacle outage"],"A runway closure begins with RWY."],
+    [28,"NOTAMs","What does the keyword TWY identify?","A taxiway-related condition",["A runway closure","A navigation outage","An airshow"],"Taxiway-related NOTAMs commonly report lights or surface conditions out of service."],
+    [28,"NOTAMs","In a NOTAM, what does OTS mean?","Out of service",["On the surface","Over the station","Open to sUAS"],"It can describe unavailable lights, beacons, aids, or communications."],
+    [28,"Altitude","How do MSL and AGL differ in an obstacle NOTAM?","MSL is elevation above sea level; AGL is height above local ground",["They are identical","MSL is distance","AGL is a frequency"],"An obstacle may be reported with both values."],
+    [28,"NOTAMs","What does the keyword COM identify?","A communications-related condition",["A runway condition","An apron closure","An obstacle"],"COM NOTAMs commonly report a navigation aid or ATIS frequency out of service."],
 
     [29,"Charts","About how many nautical miles per inch does a sectional chart depict?","About 8 nautical miles per inch",["About 1 nautical mile per inch","About 4 nautical miles per inch","About 60 nautical miles per inch"],"That scale keeps sectionals large enough for landmark navigation without being unmanageable."],
     [29,"Charts","How often are sectional charts normally reissued?","Every six months",["Every 30 days","Every 56 days","Every year"],"Treat an older chart with caution and check current NOTAMs to fill any gap."],
@@ -538,21 +561,79 @@
     [93,"Weather","Why is having offline or low-connectivity access to some weather information useful for a remote pilot working in the field?","Cell service and internet access may be unreliable at some remote operating locations",["Weather never needs to be checked once a mission begins","All operating locations always have full cell coverage","Offline access is only useful for indoor flights"],"Downloading or printing key products in advance can help bridge gaps in connectivity."],
 
     [94,"Weather","According to the weather lesson summary, where does atmospheric moisture ultimately come from?","Sources such as lakes, oceans, snow-covered fields, and rain-soaked ground",["Moisture is created entirely by aircraft engines","Moisture only comes from the stratosphere","There is no real source; moisture is constant everywhere"],"Recognizing nearby moisture sources helps a pilot anticipate fog, clouds, or reduced visibility."],
-    [94,"Weather","Why does the summary recommend treating weather self-briefing tools with some caution?","Depending on the tool, there may not be a permanent, retrievable record of exactly what weather information was checked",["These tools are always completely free from any limitation","Self-briefing tools are illegal for remote pilots to use","They always automatically log every detail with no gaps"],"Knowing what documentation exists, or doesn't, matters if a flight's decision-making is ever questioned later."]
+    [94,"Weather","Why does the summary recommend treating weather self-briefing tools with some caution?","Depending on the tool, there may not be a permanent, retrievable record of exactly what weather information was checked",["These tools are always completely free from any limitation","Self-briefing tools are illegal for remote pilots to use","They always automatically log every detail with no gaps"],"Knowing what documentation exists, or doesn't, matters if a flight's decision-making is ever questioned later."],
+
+    [95,"Loading & Performance","What generally happens to a small UAS's endurance as onboard weight increases?","Endurance decreases because more power is needed to sustain flight",["Endurance always increases with more weight","Weight has no effect on endurance","Endurance only depends on wind, never weight"],"More weight demands more lift and power, which draws down the battery or fuel faster.",null,"faa-phak"],
+    [95,"Loading & Performance","How does shifting the center of gravity (CG) too far aft generally affect a small UAS?","It reduces stability and can make the aircraft harder to control, especially in pitch",["It always improves fuel efficiency","It has no effect on handling","It automatically increases maximum airspeed"],"Manufacturers publish CG limits; loading outside them can degrade controllability.",null,"faa-phak"],
+    [95,"Loading & Performance","What is density altitude?","Pressure altitude corrected for nonstandard temperature",["The altitude shown only on a sectional chart","The exact height above ground level","A measure of wind speed at altitude"],"It is a key indicator of aircraft performance capability.",null,"faa-phak"],
+    [95,"Loading & Performance","Which conditions combine to produce high density altitude?","High temperature, high humidity, and high elevation",["Low temperature, low humidity, and low elevation","Only low elevation, regardless of temperature","Only high wind speed"],"High density altitude means the air acts as if it were thinner, reducing performance.",null,"faa-phak"],
+    [95,"Loading & Performance","How does high density altitude generally affect a small UAS's performance?","It reduces lift and engine/motor efficiency, so more power is needed for the same performance",["It always improves climb performance","It has no measurable effect on small UAS","It only affects fixed-wing aircraft, never multirotors"],"Hot, humid, high-elevation days are the most demanding for power-limited aircraft.",null,"faa-phak"],
+    [95,"Loading & Performance","What is load factor?","The ratio of the load supported by the aircraft's structure to its actual weight",["The percentage of battery remaining","The ratio of payload weight to empty weight","The angle of bank during a turn"],"Abrupt maneuvers, turbulence, and steep turns increase load factor and structural stress.",null,"faa-phak"],
+    [95,"Loading & Performance","What generally happens to stall speed (or its rotary-wing equivalent loss of control margin) as gross weight increases?","It increases",["It decreases","It stays exactly the same","It becomes irrelevant"],"A heavier aircraft needs more lift, and therefore more airspeed or power, to sustain flight."],
+    [95,"Loading & Performance","What is useful load?","The maximum weight of payload, batteries, or fuel the aircraft can carry within its maximum gross weight",["The weight of the aircraft with nothing installed","The manufacturer's suggested retail price","The weight limit set by local law only"],"Exceeding useful load can push the aircraft beyond safe or even physically possible operation."],
+    [95,"Loading & Performance","Why should a remote pilot verify weight and balance before every flight with a changed payload?","An improperly loaded aircraft may be unstable, hard to control, or unable to complete the mission safely",["Weight and balance only matters for aircraft over 55 pounds","Only the manufacturer needs to check this, never the pilot","Balance only matters for fixed-wing aircraft"],"14 CFR 107.49 requires the PIC to ensure the aircraft is in a condition for safe operation before every flight.","ecfr-107"],
+    [95,"Loading & Performance","How does turbulence or a gusty wind affect the structural load on a small UAS in flight?","It can increase load factor and structural stress beyond smooth-air conditions",["It has no effect on structural load","It always reduces structural load","It only matters above 400 feet AGL"],"Sudden gusts act like abrupt maneuvers, momentarily increasing the load the airframe must bear."],
+
+    [100,"Physiology","What does the IMSAFE checklist help a remote pilot evaluate before flying?","Personal fitness to fly: Illness, Medication, Stress, Alcohol, Fatigue, and Eating/Emotion",["Only the aircraft's mechanical condition","Only current weather conditions","Only the legality of the planned flight route"],"IMSAFE is a personal self-assessment tool used across many pilot certificates, including remote pilots.",null,"faa-phak"],
+    [100,"Physiology","How can fatigue affect a remote pilot's performance?","It slows reaction time and impairs judgment and decision-making",["It has no measurable effect on performance","It only affects night operations","It improves attention to detail"],"Fatigue is cumulative and can build up over a long flying day even without any single stressful event.",null,"faa-phak"],
+    [100,"Physiology","How can dehydration affect a remote pilot working outdoors in the field?","It can cause fatigue, headache, and reduced cognitive performance",["It has no effect on a pilot who is not flying the aircraft physically","It only affects vision, never cognition","It improves alertness in hot weather"],"Remote pilots often work outdoors in heat for extended periods and should plan for hydration."],
+    [100,"Physiology","What must a remote pilot consider before using an over-the-counter or prescription medication and then flying?","Whether the medication or its side effects (such as drowsiness) could impair the ability to safely operate the aircraft",["Only prescription medications ever need to be considered","Medication never affects the ability to fly","Only the pharmacist's opinion, not the pilot's own judgment, matters"],"Many common medications carry warnings against operating machinery or vehicles."],
+    [100,"Physiology","How can stress affect a remote pilot's decision-making?","Acute or chronic stress can narrow attention and degrade judgment",["Stress always improves reaction time","Stress has no effect on aeronautical decision-making","Only physical stress, never mental stress, is relevant"],"Recognizing personal stress levels is part of an honest self-assessment before flight.",null,"faa-phak"],
+    [100,"Physiology","Why might relying only on a first-person-view (FPV) camera feed be riskier than direct visual observation of the aircraft?","A camera feed can have reduced peripheral vision, depth perception, and field of view compared to the human eye",["A camera feed always provides better depth perception than the human eye","There is no meaningful difference between the two","FPV eliminates the need for a visual observer under all circumstances"],"This is one reason VLOS operations rely on direct unaided vision, sometimes supplemented by a visual observer."],
+    [100,"Physiology","What is the Part 107 minimum interval that must pass after consuming alcohol before acting as a remote PIC or visual observer?","8 hours",["1 hour","4 hours","24 hours"],"The person also must not be impaired by, or have a blood alcohol concentration at or above, the regulatory limit.","ecfr-107"],
+
+    [105,"Aeronautical Decision-Making","What is Aeronautical Decision-Making (ADM)?","A systematic approach to consistently determining the best course of action in response to a given set of circumstances",["A checklist used only during an emergency","A term describing only the preflight weather briefing","A formal FAA certificate endorsement"],"ADM applies throughout a flight, not just at one single decision point.",null,"faa-phak"],
+    [105,"Aeronautical Decision-Making","What does the PAVE checklist help a pilot assess when evaluating risk?","Pilot, Aircraft, enVironment, and External pressures",["Power, Altitude, Velocity, and Endurance","Preflight, Airspace, Visibility, and Emergency plan","Payload, Airspeed, Voltage, and Elevation"],"Each category is a source of risk that should be considered together, not in isolation.",null,"faa-phak"],
+    [105,"Aeronautical Decision-Making","Which of these is one of the five classic hazardous attitudes in ADM training?","Invulnerability — believing 'it won't happen to me'",["Patience","Curiosity","Preparedness"],"The five hazardous attitudes are anti-authority, impulsivity, invulnerability, macho, and resignation.",null,"faa-phak"],
+    [105,"Aeronautical Decision-Making","What is an 'external pressure' in the context of ADM?","A factor like a client deadline or schedule that pushes a pilot toward a riskier decision",["A type of severe weather system","A category of restricted airspace","A required maintenance inspection"],"Recognizing external pressure helps a pilot avoid letting it override a sound go/no-go decision.",null,"faa-phak"],
+    [105,"Aeronautical Decision-Making","What are the basic steps of the risk management process taught in ADM?","Identify the hazard, assess the risk, make a decision, implement the decision, and evaluate the outcome",["Take off, climb, cruise, descend, land","File a report, wait, resume, log, close","Charge batteries, check weather, launch, land, repeat"],"This cycle repeats continuously throughout a flight, not just once before launch.",null,"faa-phak"],
+    [105,"Aeronautical Decision-Making","What should drive a remote pilot's go/no-go decision before a flight?","An honest assessment of pilot fitness, aircraft condition, environment, and any external pressures",["Only whether the client has already paid for the job","Only whether the battery shows more than 50 percent charge","Only whether another pilot already said it was fine"],"A single weak link in any risk category can be enough reason to cancel or delay a flight."],
+
+    [109,"Radio Communications","What is a CTAF used for?","Self-announcing an aircraft's position and intentions at an airport without an operating control tower",["Broadcasting only recorded weather information","Requesting a Part 107 waiver","Filing an accident report"],"Monitoring the CTAF near an airport helps a remote pilot stay aware of nearby crewed traffic.",null,"faa-phak"],
+    [109,"Radio Communications","In standard radio phraseology, what does 'roger' mean?","The transmission was received and understood",["I will comply with your instruction","Say that again, I did not understand","Stand by, do not transmit"],"'Roger' only confirms receipt; it does not mean agreement or a promise to comply.",null,"faa-phak"],
+    [109,"Radio Communications","What phrase is used to ask someone to repeat a transmission that was not understood?","Say again",["Roger","Wilco","Over and out"],"Clear, standard phraseology reduces the chance of a misunderstood transmission.",null,"faa-phak"],
+    [109,"Radio Communications","What does 'unable' mean in standard aviation radio phraseology?","The requested action cannot be complied with",["The message was received clearly","Standing by for further instructions","The frequency is currently busy"],"Clearly stating 'unable' avoids ambiguity about whether an instruction will be followed.",null,"faa-phak"],
+    [109,"Radio Communications","Why might a remote pilot monitor airport radio traffic even when not authorized to transmit on that frequency?","To build situational awareness of nearby crewed aircraft movements",["Monitoring is required to obtain a waiver","It replaces the need for a visual observer","It grants automatic authorization to enter controlled airspace"],"Awareness of manned-aircraft radio calls can help a remote crew anticipate where traffic may appear."],
+    [109,"Radio Communications","What time reference is standard in aviation radio communications, weather reports, and NOTAMs?","Coordinated Universal Time (UTC), also called Zulu time",["Local standard time only","The pilot's home time zone only","Daylight saving time year-round"],"Using one universal time standard avoids confusion across time zones."],
+
+    [113,"Maintenance & Inspection","Who is responsible for ensuring a small UAS is in a condition for safe operation before every flight?","The remote pilot in command",["The manufacturer, once at the time of purchase","A visual observer, if one is used","No one; it is the operator's insurance company's concern"],"14 CFR 107.49 places this preflight responsibility directly on the remote PIC.","ecfr-107"],
+    [113,"Maintenance & Inspection","What should a thorough preflight inspection of a small UAS generally include?","Structure, control surfaces or propellers, the power system, and control-link components, per the manufacturer's checklist",["Only a visual check of the paint finish","Only confirming the battery is not empty","Only checking that the remote controller is turned on"],"Following the manufacturer's specific checklist helps catch problems particular to that aircraft."],
+    [113,"Maintenance & Inspection","What is the appropriate action if a preflight inspection reveals a worn or damaged component?","Correct or replace the component, or ground the aircraft, before flight",["Fly a shorter mission and monitor it in the air","Ignore minor wear if the flight is urgent","Only note it in a logbook for a future flight"],"An unsafe condition found before launch should be resolved before launch, not carried into the flight."],
+    [113,"Maintenance & Inspection","Why can firmware or software updates matter for maintenance of a small UAS?","Manufacturers may use them to fix safety-relevant flight-control or sensor issues",["Firmware updates are purely cosmetic and never safety related","Updates are illegal for civil small UAS","Only aircraft over 55 pounds ever receive firmware updates"],"Keeping firmware current, per the manufacturer's guidance, is part of keeping the aircraft airworthy."],
+
+    [116,"Crew Resource Management","What is Crew Resource Management (CRM) in the context of a small UAS operation?","The effective use of all available resources — people, equipment, and information — to safely and efficiently conduct the operation",["A rule that only applies to airline flight crews","A requirement to have at least three crew members on every flight","A type of aircraft maintenance record"],"Even a single remote pilot uses CRM concepts when coordinating with a visual observer or other crew."],
+    [116,"Crew Resource Management","What is the role of a visual observer in supporting the remote PIC?","Helping to see and avoid other aircraft, hazards, and obstacles and communicating that information to the PIC",["Taking full legal responsibility for the flight instead of the PIC","Operating the flight controls whenever the PIC is busy","Replacing the need for any preflight briefing"],"The remote PIC retains final authority and responsibility even when using a visual observer."],
+    [116,"Crew Resource Management","Why is a clear preflight briefing between the remote PIC and any visual observer or crew important?","It establishes shared expectations for roles, communication, and emergency actions before problems occur",["It is only a formality with no effect on safety","It is required only for operations over people","It replaces the need for a lost-link procedure"],"Clear roles reduce confusion and delay if something unexpected happens during the flight."],
+    [116,"Crew Resource Management","What is a reasonable response if a remote pilot becomes task-saturated during a flight?","Prioritize the most critical task, delegate to crew if possible, or land the aircraft if safety is in question",["Continue performing every task at once regardless of workload","Hand the controls to any nearby bystander","Ignore the situation until the flight ends"],"Recognizing task saturation early, rather than pushing through it, is a core CRM skill."],
+
+    [120,"Operations over people","Is routine sustained flight over people automatically permitted under Part 107?","No; it must fit one of four Operations Over People categories, another provision, or a waiver",["Yes, as long as the aircraft weighs under 55 pounds","Yes, as long as the flight is brief","Yes, everywhere except airports"],"Category eligibility depends on the aircraft's design, kinetic energy, and manufacturer declarations, not just its weight.",null,"faa-people"],
+    [120,"Operations over people","What generally makes a small UAS eligible for Category 1 operations over people?","It weighs 0.55 pounds (250 g) or less at takeoff, including everything onboard or attached",["It has no propellers","It flies below 100 feet","It is remotely identified"],"Category 1 has no FAA-accepted means of compliance or declaration requirement because of its very low mass.",null,"faa-people"],
+    [120,"Operations over people","What generally distinguishes Categories 2 and 3 from Category 1 for operations over people?","They allow heavier aircraft that meet specific injury-severity (kinetic energy or exposed rotating parts) thresholds verified by the manufacturer",["They require a heavier aircraft with no other conditions","They apply only to fixed-wing aircraft","They eliminate the need for a remote pilot certificate"],"The manufacturer must show the aircraft will not exceed a defined injury severity threshold if it strikes a person.",null,"faa-people"],
+    [120,"Operations over people","What must a manufacturer produce before a small UAS can be marketed as eligible for Category 2 or 3 operations over people?","A Declaration of Compliance (DoC) showing the aircraft meets the applicable injury-severity limits",["A state business license","A FCC radio type certificate only","A one-time FAA test flight, with no paperwork"],"The Declaration of Compliance, and the underlying means of compliance, is what actually establishes Category 2/3 eligibility — this is one of the most frequently missed topics on the real exam.",null,"faa-people"],
+    [120,"Operations over people","What generally distinguishes Category 4 operations over people from Categories 1–3?","Category 4 requires the aircraft to have an FAA-issued airworthiness certificate",["Category 4 requires no remote pilot certificate at all","Category 4 applies only to recreational flyers","Category 4 removes all altitude limits"],"Airworthiness certification is a significantly higher bar than a manufacturer's declaration of compliance.",null,"faa-people"],
+    [120,"Operations over people","Can a small UAS lose its eligibility for Categories 2, 3, or 4 through modification or poor maintenance?","Yes; the aircraft must continue to meet the conditions that supported its declaration or certificate",["No, eligibility is permanent once declared","No, only firmware updates can affect eligibility","Only a full repaint can affect eligibility"],"Operating a modified or poorly maintained aircraft as if it still qualified for its original category can violate Part 107.",null,"faa-people"],
+    [120,"Operations over people","What is a Means of Compliance (MoC) in the context of operations over people?","An FAA-accepted method a manufacturer uses to show a small UAS meets a category's injury-severity requirements",["A pilot's personal risk-assessment checklist","A type of waiver application form","A required flight log entry after every flight"],"The FAA accepts specific means of compliance submitted by manufacturers or standards bodies rather than testing every aircraft itself.",null,"faa-people"],
+    [120,"Operations over people","Besides an aircraft's category, what else must a remote pilot consider before flying over people?","Whether the specific operational area, groups, and any moving-vehicle exposure are actually consistent with that category's conditions",["Nothing else; category alone is always sufficient","Only whether it is a weekday","Only whether insurance is current"],"A category-eligible aircraft can still be flown outside the conditions that made it eligible in the first place."],
+
+    [122,"Remote ID","What is the difference between Standard Remote ID and Broadcast Module (alternative) Remote ID?","Standard Remote ID is built into the aircraft and broadcasts both aircraft and take-off location; a broadcast module is an add-on that mainly broadcasts the aircraft's own location",["They are legally identical in every respect","A broadcast module works only indoors","Standard Remote ID applies only to aircraft under 0.55 pounds"],"Aircraft without built-in Standard Remote ID can sometimes use an FAA-accepted broadcast module to comply instead.",null,"faa-register"],
+    [122,"Remote ID","What must a Remote ID message broadcast include, at minimum?","The aircraft's identification, location and altitude, velocity, and the control station's or take-off location, plus a time mark",["Only the pilot's name","Only the manufacturer's warranty number","Only the flight's planned duration"],"These minimum message elements let authorized personnel identify and locate an operating aircraft in real time.",null,"faa-register"],
+    [122,"Remote ID","When can a small UAS operate without broadcasting Remote ID under the aeronautical research or homebuilt exception?","When it is operated for aeronautical research or is an amateur-built unmanned aircraft, under conditions set by the FAA",["Any time the pilot personally judges it unnecessary","Any time the flight is over water","Never; there is no such exception"],"This is a narrow exception, distinct from the broader FRIA exception for identification-free flight.",null,"faa-register"],
+    [122,"Remote ID","Besides Remote ID, what other broadcast technology are small UAS generally prohibited from using without specific authorization?","ADS-B Out",["VHF voice radios","GPS receivers","Anti-collision strobe lights"],"ADS-B Out is reserved for the manned-aircraft surveillance system and can interfere with it if used improperly.",null,"faa-register"],
+    [122,"Remote ID","How can a person on the ground or an authorized official generally confirm a nearby drone's Remote ID broadcast?","With a compatible receiver or application capable of picking up the standard broadcast signal",["Only by contacting the FAA by phone in real time","Only by physically inspecting the aircraft after it lands","Remote ID cannot be confirmed by anyone other than the pilot"],"Remote ID is designed to be receivable by the public and officials without special access to FAA systems.",null,"faa-register"],
+    [122,"Remote ID","What must product labeling reflect for a small UAS sold as Remote ID compliant?","Whether the aircraft has Standard Remote ID or is a Remote ID broadcast module, as applicable",["Only the retail price","Only the country of manufacture","Nothing; labeling requirements do not exist"],"Accurate labeling helps a buyer know what compliance method, if any, the aircraft or accessory provides.",null,"faa-register"]
   ];
 
-  const pageCounters = {};
+  const groupCounters = {};
   const facts = rows.map((row) => {
-    const [page, topic, question, answer, distractors, explanation, figureKey, verificationSource] = row;
-    pageCounters[page] = (pageCounters[page] || 0) + 1;
-    const number = String(page).padStart(2, "0");
+    const [group, topic, question, answer, distractors, explanation, figureKey, verificationSource] = row;
+    groupCounters[group] = (groupCounters[group] || 0) + 1;
+    const groupNumber = String(group).padStart(3, "0");
+    const domain = topicDomains[topic] || "Regulations";
     const figure = figureKey ? figures[figureKey] : null;
     return {
-      id: `p${number}-${String(pageCounters[page]).padStart(2, "0")}`,
-      book: "completeRemotePilot",
-      chapter: page <= 10 ? "1" : page <= 28 ? "2" : page <= 42 ? "3" : page <= 55 ? "4" : page <= 65 ? "5" : "6",
-      page: number,
-      topic, question, answer, distractors, explanation, source: `book-${number}`,
+      id: `g${groupNumber}-${String(groupCounters[group]).padStart(2, "0")}`,
+      domain,
+      topic, question, answer, distractors, explanation, source: "faa-acs",
       verificationSource: verificationSource || null,
       image: figure?.[0], imageAlt: figure?.[1]
     };
@@ -566,7 +647,7 @@
     const rotation = index % 4;
     const options = [...initial.slice(rotation), ...initial.slice(0, rotation)];
     return {
-      id: `q-${fact.id}`, book: fact.book, chapter: fact.chapter, page: fact.page,
+      id: `q-${fact.id}`, domain: fact.domain,
       topic: fact.topic, question: fact.question, options, answer: options.indexOf(fact.answer),
       explanation: fact.explanation, source: fact.source, verificationSource: fact.verificationSource,
       image: fact.image, imageAlt: fact.imageAlt
@@ -575,22 +656,9 @@
 
   window.STUDY_DATA = {
     meta: {
-      title: "FAA Remote Pilot — source pages 01–94", version: 5,
-      reviewed: "2026-09-25", pageCount: 94,
-      note: "Content is curated for exam relevance: drone history and consumer hardware trivia (not on the FAA Airman Certification Standards) were removed. Confirm time-sensitive rules with current FAA sources."
-    },
-    books: {
-      completeRemotePilot: {
-        title: "The Complete Remote Pilot, Second Edition", shortTitle: "Complete Remote Pilot",
-        chapters: {
-          "1": "Source pages 01–10 · UAS language and systems",
-          "2": "Source pages 11–28 · applications, publications, and regulations",
-          "3": "Source pages 29–42 · airspace and navigation (Lesson 3)",
-          "4": "Source pages 43–55 · airport and off-airport operations (Lesson 4)",
-          "5": "Source pages 56–65 · radio communication procedures (Lesson 5)",
-          "6": "Source pages 66–94 · weather (Lesson 6)"
-        }
-      }
+      title: "FAA Part 107 Remote Pilot — Airman Certification Standards study bank", version: 6,
+      reviewed: "2026-09-28", domainCount: [...new Set(facts.map((f) => f.domain))].length,
+      note: "Content is built from public FAA regulatory material (14 CFR Part 107, the UAG Airman Certification Standards, and FAA handbooks), not from any copyrighted textbook. Confirm time-sensitive rules with current FAA sources."
     },
     sources, flashcards, questions
   };

@@ -1,28 +1,27 @@
 # Remote Pilot Lab
 
-Remote Pilot Lab is a responsive, no-build study website for FAA Remote Pilot material. It turns the books and notes in this course folder into active-recall flashcards and self-grading multiple-choice quizzes.
+Remote Pilot Lab is a responsive, no-build study website for the FAA Part 107 Remote Pilot Certificate ("UAG") knowledge test. It turns public FAA regulatory material into active-recall flashcards and self-grading multiple-choice quizzes.
 
-The current bank provides a page-by-page treatment of *The Complete Remote Pilot, Second Edition* (Chapters 1–2 plus Lesson 3 "Airspace and Navigation", Lesson 4 "Airport and Off-Airport Operations", Lesson 5 "Radio Communication Procedures", and Lesson 6 "Weather"), out of 94 available source images. It contains **419 focused flashcards and 419 distinct MCQs**. Learners can still keep sessions small by selecting a chapter, page, topic, and quiz length.
+**This site no longer uses any textbook.** Every item is written from public FAA sources — 14 CFR Part 107, the Unmanned Aircraft General (UAG) Airman Certification Standards, FAA handbooks (the Pilot's Handbook of Aeronautical Knowledge, Remote Pilot Study Guide), and FAA advisory circulars — plus a handful of original diagrams drawn for this site. It contains **470 focused flashcards and 470 distinct MCQs** across 13 ACS-aligned knowledge areas. Learners can keep sessions small by selecting a knowledge area, topic, and quiz length.
 
-- **Exam-relevance policy:** every item in the bank is meant to map to a topic actually covered by the FAA Part 107 (Unmanned Aircraft General, "UAG") knowledge test — the Airman Certification Standards areas are: applicable regulations, airspace classification and flight restrictions, aviation weather sources, effects of weather on performance, small UAS loading, emergency procedures, crew resource management, radio communication procedures, determining the performance of small UAS, physiological effects of drugs and alcohol, aeronautical decision-making, airport operations, and maintenance/preflight inspection. Drone history, consumer-hardware trivia (ESC, IMU, gimbal, LiPo C-rating, quadcopter/hexacopter naming, RC transmitter stick modes), and website-navigation specifics ("what does clicking this tab show") are **not** tested and were intentionally excluded — see the 2026-09-25 change-log entry for what was removed and why. When adding new material, ask "could this plausibly appear on the UAG test?" before adding a row; if not, it belongs in a different resource, not this bank.
+- **Exam-relevance policy:** every item maps to a topic actually covered by the FAA UAG knowledge test. The FAA reweighted the test in September 2025 — Regulations now make up roughly **48%** of the exam, Operations ~25%, Airspace ~20%, Weather ~5%, Loading & Performance ~2% (see `RECENT_EXAM_TOPICS.md` for the full breakdown and citations). Content coverage spans all knowledge areas regardless of weighting, but new material should be prioritized toward Regulations and Operations Over People, which the FAA's own "frequently missed" statistics flag as the hardest area for real test-takers.
+- **Living exam-topics log:** `RECENT_EXAM_TOPICS.md` tracks official FAA test-format changes and recurring topics reported by test-takers and prep sites over the last year. Ask an AI assistant with web access to periodically check for updates and append new dated entries — it is designed to be extended, not replaced.
 
 ## Important context for humans and AI models
 
-- `questions.js` in the repository root is the single source of truth for all flashcards, quiz questions, book metadata, and source references.
-- `COVERAGE.md` is the audit showing the number and subject of study items derived from every source page.
-- The original book scans and Word transcription live under `Photos from Books/`. That folder is deliberately excluded from Git because it contains large source files and copyrighted book pages.
-- The Word document contains all 28 full-page facsimiles, but its searchable OCR text is **not a perfect verbatim transcription**. Use the facsimile pages as the authority when the OCR differs.
-- The existing review found common OCR problems: merged words, bad punctuation or symbols, misspellings, and incorrect reading order on complex pages. Do not generate a new rule or exact quotation solely from imperfect OCR.
-- Regulations change. For operational decisions, use the current CFR, the operator's authorizations, and current FAA material—not this website or the book alone.
+- `questions.js` in the repository root is the single source of truth for all flashcards, quiz questions, and source references.
+- `COVERAGE.md` is the audit showing the number and subject of study items in each knowledge area.
+- `RECENT_EXAM_TOPICS.md` is the living log of FAA test-format changes and recently reported exam topics — never verbatim leaked questions.
+- No book content of any kind is used or stored in this repository. Regulations change; for operational decisions, use the current CFR, the operator's authorizations, and current FAA material — not this website alone.
 - Quiz state is intentionally kept only in memory. Reloading the page resets the quiz, score, streak, and flashcard markings.
-- **Image policy:** this is a public GitHub Pages site, so book-page figure crops under `assets/books/complete-remote-pilot/page-*.jpg` are kept deliberately few and tightly cropped (legacy content from source pages 01–28; 4 remain after the 2026-09-25 exam-relevance cleanup removed three that only supported deleted, non-exam flashcards). For source pages 29–42 (added 2026-09-24), no new book-figure crops were added. Instead, a handful of concepts that are genuinely hard to convey in text got **original hand-drawn SVG diagrams** (`assets/books/complete-remote-pilot/diagram-*.svg`) illustrating the underlying generic concept (airspace shapes, a lat/long globe grid, a wind-correction vector triangle) in this site's own colors and layout — not a trace or redraw of the book's specific artwork. Prefer this approach (original diagram or plain text) over cropping new book pages for future source pages, unless the site owner explicitly asks for a book crop.
+- **Image policy:** all figures under `assets/diagrams/` are original SVG diagrams drawn for this site (airspace class cross-sections, a lat/long globe grid, a wind-correction vector triangle, aircraft axes, the traffic pattern, front symbols, cloud families, and the thunderstorm life cycle) in this site's own colors and layout. Because sectional charts, METAR/TAF formats, and similar FAA/NOAA-produced material are U.S. government works, they are not copyrighted and can in principle be reproduced directly — but original redrawn diagrams are still preferred so the site teaches the underlying legend/symbology rather than one memorized excerpt (this also future-proofs against the FAA's October 2026 move to live, non-supplement chart images on the real exam — see `RECENT_EXAM_TOPICS.md`).
 
 ## Change log
 
-- **2026-09-24** — Added source pages 29–42 (Lesson 3, "Airspace and Navigation": charts, geographic coordinates, magnetic variation, wind correction, groundspeed/airspeed, airspace classes A–G, special use airspace, ADIZ, and wildlife refuge areas). Bank grew from 170 to 240 flashcards/MCQs. All new study text is original paraphrased Q&A; four original SVG diagrams were added instead of new book-page crops (see the image policy above).
-- **2026-09-24** — Added source pages 43–94 (Lesson 4 "Airport and Off-Airport Operations", Lesson 5 "Radio Communication Procedures", Lesson 6 "Weather"), based on 52 new page photos renamed `43.jpg`–`94.jpg` in `Photos from Books/.../`. Bank grew from 240 to 467 flashcards/MCQs across three new chapters (4, 5, 6). Four more original SVG diagrams were added (traffic pattern, front symbols, cloud families, thunderstorm life cycle) — still no new book-page crops. Several source pages in this batch were screenshots of government (NOAA/FAA) websites or standardized reference tables (METAR/TAF key, phonetic alphabet); these were represented as original paraphrased text facts rather than cropped, consistent with the image policy.
-- **2026-09-25** — Removed 48 non-exam-relevant items (467 → 419) after the site owner pointed out a drone-history flashcard ("early uncrewed aerial mission in 1849") that would never appear on the actual FAA Part 107 test. Removed entirely: source pages 1–2 (drone/RC history), 5–9 (aircraft hardware trivia: flight controller, IMU, ESC, motors, LiPo specs, propellers, gimbal, headless mode, trim, RC transmitter stick modes), and 11 (industry "applications" of UAS), plus 8 scattered items on pages 80/84/86/88 that were specific to a weather website's UI (e.g., a "FltCat" abbreviation, the NDFD tool's interface, an HEMS chart, dBZ units) rather than exam-tested concepts. Also deleted the three book-figure crops (`page-05-aircraft-configurations.jpg`, `page-06-flight-controller.jpg`, `page-08-remote-controller.jpg`) that only those removed flashcards used. See the exam-relevance policy above; apply the same "could this be on the UAG test?" filter to any future additions.
-- **2026-09-25** — Rewrote weak MCQ distractors across the bank after the site owner noticed some wrong answers were absurd non-sequiturs (e.g. "A weather product" as a distractor for "what is a FRIA?", or "A higher altitude" for a question about falsifying records) rather than plausible-but-wrong options. Real FAA Part 107 distractors stay in the same category/unit as the correct answer (same kind of value, adjacent-but-wrong regulatory term, or a plausible misconception) so the question actually tests knowledge instead of being solvable by eliminating the silly option. Reviewed all 419 items and rewrote roughly 35 rows' distractor sets (concentrated in source pages 3–4, 12, 14–27, and a few scattered elsewhere — the airspace, radio, and weather sections were already solid). **When adding new items, write distractors a real test-taker would have to actually rule out, not ones a skim-reader would eliminate on sight.**
+- **2026-09-28** — Removed all book-derived content. Deleted the five remaining book-page photo crops (`assets/books/complete-remote-pilot/page-*.jpg`) and the entire local `Photos from Books/` source archive. Moved the eight original SVG diagrams (never book scans) to a book-independent `assets/diagrams/` folder and added a ninth, `aircraft-axes.svg`, to replace a deleted book photo. Restructured the data model: `book`/`chapter`/`page` are gone, replaced by a `domain` field aligned to the FAA UAG Airman Certification Standards' knowledge areas (Regulations, Airspace, Weather, Airport Operations, Loading & Performance, Emergency Procedures, Crew Resource Management, Radio Communications, Physiology, Aeronautical Decision-Making, Maintenance & Inspection, Remote ID & Registration, Charts & Navigation). Added 50 new original items covering areas the book-based bank barely touched: Loading & Performance, Physiology (IMSAFE, fatigue, dehydration, medication), Aeronautical Decision-Making (PAVE, hazardous attitudes, risk management), Radio Communications (CTAF, standard phraseology), Maintenance & Inspection, Crew Resource Management, and a dedicated Operations Over People / Remote ID cluster — the former because FAA's own quarterly "frequently missed ACS codes" report names the Operations-Over-People Declaration of Compliance as the single hardest UAG topic (73% miss rate). Bank grew from 419 to 470 items. Added `RECENT_EXAM_TOPICS.md`, a living log of FAA test-format changes (the September 2025 blueprint reweighting, the upcoming October 2026 move to live chart images) and recently reported exam topics, meant to be extended over time.
+- **2026-09-24** — *(historical, book-based bank)* Added source pages 29–42 (airspace and navigation). Bank grew from 170 to 240 items.
+- **2026-09-24** — *(historical, book-based bank)* Added source pages 43–94 (airport operations, radio communications, weather). Bank grew from 240 to 467 items.
+- **2026-09-25** — *(historical, book-based bank)* Removed 48 non-exam-relevant items (467 → 419) and rewrote weak MCQ distractors across the bank. This content and its book-page figure crops were superseded by the 2026-09-28 rebuild above.
 
 ## Project structure
 
@@ -32,12 +31,11 @@ The current bank provides a page-by-page treatment of *The Complete Remote Pilot
 ├── styles.css                 # Responsive visual system
 ├── app.js                     # Flashcard and quiz behavior
 ├── questions.js               # ALL study content; keep this at root
-├── COVERAGE.md                # Page-by-page content audit
+├── COVERAGE.md                # Knowledge-area content audit
+├── RECENT_EXAM_TOPICS.md       # Living log of FAA test changes and reported exam topics
 ├── assets/
-│   └── books/
-│       └── complete-remote-pilot/
-│           └── *.jpg          # Selected, tightly cropped study figures
-├── Photos from Books/          # Local source archive; ignored by Git
+│   └── diagrams/
+│       └── *.svg               # Original diagrams drawn for this site
 └── README.md
 ```
 
@@ -58,36 +56,36 @@ Then visit `http://localhost:8000`.
 Add a fact row to the `rows` array in `questions.js`. Each fact automatically becomes one flashcard and one independently answerable MCQ:
 
 ```js
-[29, "Weather",
+[groupNumber, "Topic",
   "A single, focused prompt?",
   "The concise correct answer.",
   ["Plausible distractor 1", "Plausible distractor 2", "Plausible distractor 3"],
   "Why the answer is correct and what mistake to avoid.",
   "optionalFigureKey",
-  "optional-current-source-id"
+  "optional-verification-source-id"
 ]
 ```
 
-The option order rotates automatically so correct answers do not stay in the same letter position. Figure keys are defined near the top of the file. Keep crops wide enough to include the complete figure, labels, borders, legends, and any cautionary note that changes its meaning. The traffic-pattern crop was specifically rechecked to ensure its left edge, base leg, border, and printed note are present.
+The first element is just a grouping number used to keep related rows together and generate a stable ID prefix — it has no meaning outside this file (there is no page or book behind it anymore). The `Topic` string must appear in the `topicDomains` map near the top of `questions.js` so the item gets assigned to the correct FAA ACS knowledge area (`domain`); add a new topic to that map when introducing a genuinely new topic. The option order rotates automatically so correct answers do not stay in the same letter position. Figure keys are defined in the `figures` object near the top of the file and must point at `assets/diagrams/*.svg` — never re-add a book-page image. The `source` for every item is always `"faa-acs"`; use the optional final element only to add a stronger, topic-specific `verificationSource` (an entry from the `sources` object, e.g. `"faa-laanc"`).
 
-Stable IDs are generated from the source page and the row's position on that page. Append new rows instead of silently reordering existing rows when preserving IDs matters. The interface supports 10, 20, 50, 100, all matching questions, or an endless mode that keeps reshuffling and re-serving the filtered pool (with a live running percent-correct) until the learner ends the session.
+Append new rows instead of silently reordering existing ones when preserving IDs matters. The interface supports 10, 20, 50, 100, all matching questions, or an endless mode that keeps reshuffling and re-serving the filtered pool (with a live running percent-correct) until the learner ends the session.
 
-## Add another book
+## Adding new study material from online sources
 
-1. Keep original scans in a clearly named subfolder under `Photos from Books/`.
-2. Add the book and chapter names under `STUDY_DATA.books`.
-3. Put web-ready figure crops in `assets/books/<book-slug>/`.
-4. Add sources and study items with the new `book` ID.
-5. Verify every figure crop visually and every answer against the source page.
-6. If the subject is regulatory, medical, financial, or otherwise time-sensitive, cross-check an authoritative current source and record its URL in `STUDY_DATA.sources`.
+1. Ground every new item in a public, ideally official FAA source (14 CFR Part 107/89 via ecfr.gov, the UAG Airman Certification Standards, an FAA handbook or advisory circular) — never copy wording from a copyrighted textbook.
+2. Write the question and answer in your own words; do not paste large verbatim blocks even from a public-domain source.
+3. If the topic is genuinely new, add it to the `topicDomains` map in `questions.js` so it's grouped under the right ACS knowledge area.
+4. Prefer original diagrams (`assets/diagrams/*.svg`) or plain text over any copied image. Sectional charts, METAR/TAF formats, and other FAA/NOAA products are U.S. government works and not copyrighted, so they can be reproduced directly if needed, but a redrawn original diagram that teaches the underlying legend is usually more durable and more useful for learning.
+5. If the subject is regulatory, medical, or otherwise time-sensitive, cross-check the current rule and record its URL in `STUDY_DATA.sources`, then cite it as the item's `verificationSource`.
+6. For genuinely new, unverified exam-topic chatter (not settled fact), add it to `RECENT_EXAM_TOPICS.md` instead of turning it into a flashcard until it's corroborated.
 
-The UI discovers chapters and topics from the data, so new filters appear automatically.
+The UI discovers knowledge areas and topics from the data, so new filters appear automatically.
 
 ## Content quality checklist
 
 Before merging new study material:
 
-1. Verify the question and answer against the full source-page image, not OCR alone.
+1. Verify the question and answer against a current, official FAA source — not memory, not a textbook, not an unverified forum post.
 2. Make each question test one idea and avoid ambiguous wording.
 3. Make wrong answers plausible but unambiguously wrong.
 4. Confirm the `answer` index and source ID.
@@ -122,7 +120,7 @@ Good future improvements, in priority order:
 
 The data file is plain JavaScript. At minimum, open the browser developer console and make sure it reports no duplicate IDs, missing sources, or invalid answer indices. Also exercise these paths manually:
 
-- chapter and topic filters;
+- knowledge-area and topic filters;
 - image and text-only flashcards;
 - keyboard controls;
 - correct and incorrect quiz answers;
@@ -144,11 +142,18 @@ The public URL will normally be `https://<username>.github.io/<repository>/`.
 
 ## Current official references
 
+- [14 CFR Part 107 (Small UAS)](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107)
+- [14 CFR Part 89 (Remote ID)](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-89)
+- [FAA UAG Airman Certification Standards](https://www.faa.gov/training_testing/testing/acs)
+- [FAA Airman Testing (community advisories, current blueprint, sample questions)](https://www.faa.gov/training_testing/testing)
 - [FAA Part 107 overview](https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107)
 - [Become a Certificated Remote Pilot](https://www.faa.gov/uas/commercial_operators/become_a_drone_pilot)
 - [FAA accident reporting FAQ](https://www.faa.gov/faq/when-do-i-need-report-accident)
 - [Low Altitude Authorization and Notification Capability](https://www.faa.gov/uas/getting_started/laanc)
 - [Operations Over People](https://www.faa.gov/uas/commercial_operators/operations_over_people)
 - [Drone Registration and Remote ID](https://www.faa.gov/uas/getting_started/register_drone)
+- [Pilot's Handbook of Aeronautical Knowledge](https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/phak)
 
-Last regulatory review: **September 24, 2026**.
+See `RECENT_EXAM_TOPICS.md` for FAA's current test blueprint weighting, upcoming test-format changes, and recently reported exam topics.
+
+Last regulatory review: **September 28, 2026**.
